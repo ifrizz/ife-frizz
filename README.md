@@ -12,3 +12,6 @@
 ## 学习笔记 & Code Review
 - 收获新技能的时候记得写点笔记哦
 - 吃饱了可以review其他团队的代码啦
+
+
+![Thanks Xinxin](frizz.png)
