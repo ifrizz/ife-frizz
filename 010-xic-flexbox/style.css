@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container > * {
+    width: 150px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* 喂又擅自指定官方配色了wwww */
+.item1 { height: 120px; background: indigo }
+.item2 { height: 100px; background: darkturquoise }
+.item3 { height:  40px; background: gold }
+.item4 { height: 200px; background: firebrick }
+
+@media all and (max-width: 640px) {
+    .container { align-items: flex-start; flex-wrap: wrap }
+    .item1 { order: 2 }
+    .item2 { order: 3 }
+    .item3 { order: 4 }
+    .item4 { order: 1 }
+}
+
+/* css color names: http://www.w3schools.com/colors/colors_names.asp */
