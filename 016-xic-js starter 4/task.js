@@ -1,27 +1,28 @@
 
 var aqiData = {};
+
+// elements
 var inputCity  = document.getElementById('aqi-city-input'),
     inputAqi   = document.getElementById('aqi-value-input'),
     button     = document.getElementById('add-btn');
     table      = document.getElementById("aqi-table");
     checkmarks = document.getElementsByClassName ('checkmark');
 
-// validate strategy
+// input validators
 var CityValidator = {
     pattern : /^[A-Za-z\u4E00-\u9FA5]+$/,
     errorMessage : "* Input only characters"
 };
 
-// validate strategy
 var AqiValidator = {
     pattern : /^\d+$/,
     errorMessage : "* Input a nonnegative integer"
 }
 
-// strategy executor
 var validate = function(element, validator) {
     var tips = element.parentElement.nextElementSibling;
     var mark = element.nextElementSibling;
+
     // validate
     if (element.value.trim().match(validator.pattern)){
         tips.style.display = 'none';
@@ -31,6 +32,7 @@ var validate = function(element, validator) {
         mark.style.display = 'none';
         tips.innerHTML = validator.errorMessage;
     }
+
     // check if all fields are completed
     if (checkAllFields()) {
         button.className = '';
@@ -86,14 +88,17 @@ function delBtnHandle (item) {
 }
 
 function init() {
+
     // add listener to input
     inputCity.addEventListener ('input', function(event) { validate(inputCity, CityValidator); });
     inputAqi.addEventListener  ('input', function(event) { validate(inputAqi, AqiValidator);   });
+
     // add listener to add botton
     button.className = "disable";
     button.addEventListener("click", addBtnHandle);
-    // add listener to all delete button
-    document.getElementById('aqi-table').addEventListener("click", function(event){
+
+    // add listener to all delete buttons
+    document.getElementById('aqi-table').addEventListener("click", function(event) {
         if (event.target.nodeName.toLowerCase() == 'button')
             delBtnHandle (event.target.dataset.item)
     });

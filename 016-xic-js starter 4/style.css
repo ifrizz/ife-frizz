@@ -28,18 +28,6 @@ body, html * {
     outline: none;
     transition: all 0.3s ease-in-out;
 }
-.item label input.inputFocus {
-    border: 1px solid #62AEEC;
-    box-shadow: 0 0 5px #62aeec;
-}
-.item label input.errorInput {
-    border: 1px solid #DE000F;
-    box-shadow: 0 0 5px #de000f;
-}
-.item label input.input.correctInput {
-    border: 1px solid #61BA46;
-    box-shadow: 0 0 5px #61ba46;
-}
 
 #add-btn {
   width: 60px;
@@ -60,6 +48,7 @@ body, html * {
     cursor: default;
 }
 
+/* tips */
 .tips {
   display: none;
   margin: 5px 0 0px 55px;
@@ -89,7 +78,6 @@ body, html * {
     left:8px;
     top:4px;
 }
-
 .checkmark_kick {
     position: absolute;
     width:3px;
@@ -99,6 +87,7 @@ body, html * {
     top:9px;
 }
 
+/* table */
 table {
     margin: 10px;
     border-collapse:collapse;
