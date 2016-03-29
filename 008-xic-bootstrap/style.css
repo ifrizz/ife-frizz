@@ -1,0 +1,29 @@
+body { margin: 0px }
+* { box-sizing: border-box }
+.container   { width: 100%; display: block; padding: 10px; margin: 0px }
+.container:before, .container:after { clear:both }
+
+/* columes */
+[class*='col-']  { float:left; padding: 10px }
+[class*='frizz'] { height: 50px }
+
+.frizz1 { background: indigo }
+.frizz2 { background: firebrick }
+.frizz3 { background: darkturquoise }
+.frizz4 { background: gold }
+
+@media (min-width: 769px) {
+    .col-md-1  { width: 8.33% }
+    .col-md-2  { width: 16.66% }
+    .col-md-3  { width: 25% }
+    .col-md-4  { width: 33.33% }
+    .col-md-6  { width: 50% }
+}
+
+@media (max-width: 768px) {
+    .col-sm-2  { width: 16.66% }
+    .col-sm-3  { width: 25% }
+    .col-sm-6  { width: 50% }
+    .col-sm-8  { width: 66.66% }
+    .col-sm-12 { width: 100% }
+}
