@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task 13</title>
+    <link rel="shortcut icon" href="../img/icon4.ico">
+</head>
+<body style="font-family:Arial">
+    <label>Input today's AQI:
+        <input id="aqi-input" type="text">
+    </label>
+    <button id="button">Confirm</button>
+    <div>Input: <span id="aqi-display">null</span></div>
+
+    <script type="text/javascript">
+
+    (function(){
+        var button = document.getElementById('button');
+        var input = document.getElementById('aqi-input');
+        var span = document.getElementById('aqi-display');
+
+        button.onclick = function() {
+            span.innerHTML = input.value.trim() == "" ? "null" : input.value.trim();
+        }
+
+        // 强行C程序员（掀桌
+        // 两个教授每天为了问号运算符是否影响可读性撕得不可开交（就是这么中二你咬我呀2333
+
+    })();
+
+    </script>
+
+</body>
+</html>

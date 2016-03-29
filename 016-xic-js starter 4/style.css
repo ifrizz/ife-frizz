@@ -1,0 +1,75 @@
+body, html * {
+    box-sizing: border-box;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+#form {
+    width: 290px;
+    overflow: hidden;
+}
+
+.item {
+    margin: 15px;
+}
+.item label span  {
+    display: inline-block;
+    width: 30px;
+    text-align: right;
+}
+.item label input {
+    width: 200px;
+    height: 25px;
+    padding: 8px;
+    border: 1px solid #AEAEAE;
+    margin: 0 0 0 20px;
+    border-radius: 3px;
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+.item label input.inputFocus {
+    border: 1px solid #62AEEC;
+    box-shadow: 0 0 5px #62aeec;
+}
+.item label input.errorInput {
+    border: 1px solid #DE000F;
+    box-shadow: 0 0 5px #de000f;
+}
+.item label input.input.correctInput {
+    border: 1px solid #61BA46;
+    box-shadow: 0 0 5px #61ba46;
+}
+
+#add-btn {
+  width: 60px;
+  height: 30px;
+  border: 1px solid #2A6CA8;
+  margin-right: 21px;
+  border-radius: 4px;
+  background: #2F79BA;
+  float: right;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+#add-btn.disable {
+    border: 1px solid #aaa;
+    background: #ccc;
+    cursor: default;
+}
+
+.tips {
+  display: none;
+  margin: 5px 0 0px 95px;
+  color: #AEAEAE;
+  font-size: 80%;
+  transition: all 0.3s ease-in-out;
+}
+.tips.errorTips {
+    color: #DE000F;
+}
+.tips.correctTips {
+    color: #61BA46;
+}
