@@ -1,63 +1,100 @@
 
 var aqiData = {};
-var inputCity = document.getElementById('aqi-city-input'),
-    inputAqi = document.getElementById('aqi-value-input'),
-    button = document.getElementById('add-btn');
+var inputCity  = document.getElementById('aqi-city-input'),
+    inputAqi   = document.getElementById('aqi-value-input'),
+    button     = document.getElementById('add-btn');
+    table      = document.getElementById("aqi-table");
+    checkmarks = document.getElementsByClassName ('checkmark');
 
-function checkCityInput (input, tips) {
+// validate strategy
+var CityValidator = {
+    pattern : /^[A-Za-z\u4E00-\u9FA5]+$/,
+    errorMessage : "* Input only characters"
+};
 
+// validate strategy
+var AqiValidator = {
+    pattern : /^\d+$/,
+    errorMessage : "* Input a nonnegative integer"
 }
 
-function checkAqiInput () {
-
+// strategy executor
+var validate = function(element, validator) {
+    var tips = element.parentElement.nextElementSibling;
+    var mark = element.nextElementSibling;
+    // validate
+    if (element.value.trim().match(validator.pattern)){
+        tips.style.display = 'none';
+        mark.style.display = 'inline-block';
+    } else {
+        tips.style.display = 'block';
+        mark.style.display = 'none';
+        tips.innerHTML = validator.errorMessage;
+    }
+    // check if all fields are completed
+    if (checkAllFields()) {
+        button.className = '';
+    } else {
+        button.className = 'disable';
+    }
 }
 
+function checkAllFields() {
+    for (var i=0; i<checkmarks.length; i++) {
+        if (checkmarks[i].style.display == 'none')
+            return false;
+    }
+    return true;
+}
+
+function resetAllFields() {
+    inputCity.value = "";
+    inputAqi.value = "";
+    button.className = 'disable';
+    for (var i=0; i<checkmarks.length; i++)
+        checkmarks[i].style.display = 'none';
+}
+
+// add data
 function addAqiData() {
-    // get custom input
     var city = inputCity.value.trim(),
         aqi  = inputAqi.value.trim();
+    aqiData[city] = aqi;
 }
 
-/**
- * 渲染aqi-table表格
- */
+// show data table
 function renderAqiList() {
-
+    var txt = "<tr><th>City</th><th>AQI</th><th>Option</th></tr>";
+    for (var item in aqiData)
+        txt += "<tr><td>"+ item + "</td><td>" + aqiData[item] + "</td><td><button data-item='" + item + "'>Delete</button></td></tr>";
+    table.innerHTML = item ? txt : "";
 }
 
-/**
- * 点击add-btn时的处理逻辑
- * 获取用户输入，更新数据，并进行页面呈现的更新
- */
+// add button
 function addBtnHandle() {
-  addAqiData();
-  renderAqiList();
+    if (button.className == "") {
+        addAqiData();
+        renderAqiList();
+        resetAllFields();
+     }
 }
 
-/**
- * 点击各个删除按钮的时候的处理逻辑
- * 获取哪个城市数据被删，删除数据，更新表格显示
- */
-function delBtnHandle (city) {
-  // do sth.
-
-  renderAqiList();
+// delete button
+function delBtnHandle (item) {
+    delete aqiData[item];
+    renderAqiList();
 }
 
 function init() {
     // add listener to input
-    inputCity.addEventListener("unfocus", function(event) {
-        checkCityInput(inputCity.value, inputCity.parentElement.nextElementSibling);
-    });
-    inputAqi.addEventListener("unfocus", function(event) {
-        checkCityInput(inputAqi.value, inputAqi.parentElement.nextElementSibling);
-    });
+    inputCity.addEventListener ('input', function(event) { validate(inputCity, CityValidator); });
+    inputAqi.addEventListener  ('input', function(event) { validate(inputAqi, AqiValidator);   });
     // add listener to add botton
     button.className = "disable";
     button.addEventListener("click", addBtnHandle);
     // add listener to all delete button
     document.getElementById('aqi-table').addEventListener("click", function(event){
         if (event.target.nodeName.toLowerCase() == 'button')
-            delBtnHandle (event.target)
+            delBtnHandle (event.target.dataset.item)
     });
 }
