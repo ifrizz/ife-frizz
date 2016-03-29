@@ -3,5 +3,6 @@
 ## HTML, CSS
 * [HTML基础](HTML_notes.md)
 * [Flexbox](Flexbox.md)
+* [Centering](Centering.md)
 
 ## JavaScript
