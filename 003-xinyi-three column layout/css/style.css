@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*body { margin: 0; color: #333; background-color: #eee; font-family: "microsoft yahei"; font-size: 12px }*/
+body {padding: 20px}
+header { float: left; background-color: #333; padding: 10px 0; width: 100%; min-width: 1000px }
+footer { width: 100%; background-color: #333; color: #fff; text-align: center; line-height: 4em; bottom: 0; left: 0; position: fixed;}
+
+img { max-height: 100% }
+button { cursor: pointer }
+
+
+/* content */
+.content, .left, .right, .middle {
+    border-style: solid;
+    border-color: #999;
+    border-width: 1px;
+    padding: 20px;
+    overflow: auto;
+    background-color: #fff
+}
+
+.content { 
+    background-color: #eee;
+    height: 100%;
+    position: relative;
+}
+
+.left {
+    width: 160px;
+    float: left;
+}
+
+.middle {
+    margin-left: 220px;
+    margin-right: 140px;
+}
+
+.right {
+    width: 80px;
+    float: right;
+}
+
+/* item */
+.team {
+    float: right;
+    font-size: 13px;
+}
+
+.member {
+    margin-bottom: 20px;
+    border: 1px solid #999;
+}
