@@ -1,4 +1,4 @@
-# Object-Oriented Javascript
+﻿# Object-Oriented Javascript
 
 （然而框架已经封装好了继承 你别闹了
 
@@ -78,7 +78,9 @@ function Animal () {
 ```
 
 **1. Apply Constructor**
+
 // 这是一颗已经没有什么人用的语法榴莲糖
+
 ```
 function Cat (name, color) {
     Animal.apply (this, arguments);
@@ -90,8 +92,11 @@ alert (cat1.species);  // "animal"
 ```
 
 **2. Use Prototype**
+
 最常见继承方式
+
 将Cat的prototype对象指向Animal实例（果然是abstract class
+
 ```
 Cat.prototype = new Animal();
 Cat.prototype.constructor = Cat
@@ -121,6 +126,7 @@ Cat.prototype.constructor = Cat;
 **4. 利用空对象作为中介**
 
 空对象不含private fields，节约内存
+
 ```
 function extend (Child, Parent) {
     var F = function() { };
@@ -144,6 +150,7 @@ function extend (Child, Parent) {
 // 以上造成了浅拷贝，我书读得少你不要骗我
 
 **6. 深拷贝**
+
 找到了十分魔幻的深拷贝继承2333（jQuery中继承的实现方式
 ```
 function deepCopy(Child, Parent) {
