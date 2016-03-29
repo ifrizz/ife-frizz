@@ -22,5 +22,5 @@
 
 * `top`: 50%
 * `left`: 50%
-* `margin-top`: - height / 2 - padding
-* `margin-left`: - width / 2 - padding
+* `margin-top`: $- \frac{height}{2} - padding$
+* `margin-left`: $- \frac{width}{2} - padding$
