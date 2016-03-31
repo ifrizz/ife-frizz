@@ -14,8 +14,12 @@
 
 ## JavaScript
 
-* [JavaScript Basis:](Javascript_Basis.md) 自用的逗比笔记
+* [JavaScript 基础与细节](Javascript_Basis.md)
 
-* [DOM APIs:](DOM_APIs.md) 常用DOM API，覆盖Task 13 - 25
+* [JavaScript 封装与继承](Javascript_OO.md)
 
-* [JavaScript Encapsulation & Inheritance](Javascript_OO.md)
+* [DOM 常用API](DOM_APIs.md)
+
+* [jQuery API 给开始写jQuery的苦逼小伙伴w](jQuery_APIs.md)
+
+
