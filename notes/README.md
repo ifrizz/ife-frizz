@@ -4,6 +4,8 @@
 
 * [HTML基础](HTML_notes.md)
 
+* [CSS基础](CSS_basics.md)
+
 * [Flexbox](Flexbox.md)
 
 * [Centering](Centering.md)
