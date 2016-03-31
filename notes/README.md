@@ -8,6 +8,8 @@
 
 * [Centering](Centering.md)
 
+* [Newspaper Layout](newspaper_layout.md)
+
 ## JavaScript
 
 * [JavaScript Basis:](Javascript_Basis.md) 自用的逗比笔记
