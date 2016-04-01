@@ -37,7 +37,7 @@ for (item of array) { }
 ```
 
 
-## HashMap
+## Array
 
 ```JavaScript
 var array;
@@ -45,18 +45,29 @@ array["key"] = "data";
 ```
 ——快看我望着脚本语言的惊愕神情（你咬我呀
 
-这个长得很像array的东西不是array。重要的话不说三遍。比如：
+```
+var arr = [];
+arr["a"] = 1; arr["b"] = 2; arr["c"] = 3;
+console.log(arr.length);
+```
+此时输出 arr.length = 0
+
+因此这个array无法用传统`for-loop`和`forEach`来遍历，请使用`for-in`
 
 ```
-var map = [];
-map["a"] = 1; map["b"] = 2; map["c"] = 3;
-console.log(map.length);
+var arr = [];
+arr[100] = "item";
+arr.length;     // arr.length = 101
+sizeof(arr);    // sizeof(arr) = 1
 ```
-此时输出 map.length = 0
 
-因此这个map无法用传统`for-loop`和`forEach`来遍历，请使用`for-in`
+`array.length`在每次向数组插入元素时更新，数值比最大index多1
 
-## yDetails
+`sizeof(array)`返回array中实际的元素个数
+
+* more array methods: `push()`, `pop()`, `sort()`, `slice()`, `splice()`
+
+## Details
 
 **== vs. ===**
 
