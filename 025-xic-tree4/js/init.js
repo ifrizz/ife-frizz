@@ -34,27 +34,22 @@ function addDomItem (parent, strings) {
     return div;
 }
 
+var trie;
+var menuRoot;
 function init () {
-    var list = document.getElementById("list-container");
-
+    menuRoot = document.getElementById("list-container");
+    trie = new SuffixTrie();
     // traverse data
-    for (var season of data) { // traverse seasons
-        var ss = addDomNode(list, "season", season.name.toUpperCase());
-        for (var cons of season.cons) { // travers constellations
+    for (var season of data) {                        // traverse seasons
+        var ss = addDomNode(menuRoot, "season", season.name.toUpperCase());
+        for (var cons of season.cons) {               // travers constellations
             var c = addDomNode(ss, "constellation", cons.name, cons.alias.toUpperCase());
-            for (var star of cons.stars) { // travers stars
+            trie.add(cons.name.toLowerCase(), c);     // add constellation name to trie
+            for (var star of cons.stars) {            // travers stars
                 var s = addDomNode(c, "star", star.name, star.alias);
+                trie.add(star.name.toLowerCase(), s); // add star name to trie
                 addDomItem(s, star.info);
             }
         }
     }
-
-    var trie = new SuffixTrie();
-
-    var input = "Sells sea shells by the sea shore";
-    input = input.split(" ");
-    for (var i in input) {
-        trie.add(input[i].toLowerCase(), input[i].toLowerCase());
-    }
-    console.log(trie.get("ell"));
 }

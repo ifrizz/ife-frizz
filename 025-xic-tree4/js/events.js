@@ -68,3 +68,18 @@ function unfold (elem) {
         addClass(node, "close");
     removeClass(elem, "close");
 }
+
+// searching
+function search (input) {
+    if (input=="") {
+
+    }
+}
+
+// reset menu folding status
+function resetMenu() {
+    var divs = menuRoot.querySelectorAll("div");
+    for (var i in divs) {
+        
+    }
+}

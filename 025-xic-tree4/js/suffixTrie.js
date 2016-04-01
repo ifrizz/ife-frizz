@@ -1,8 +1,10 @@
-// where is my private method QAQQQQ
+// where is my private method QWQ
+
 function TrieNode() {
     this.elem = [];
     this.child = [];
 }
+
 
 TrieNode.prototype = {
     constructor : TrieNode,
@@ -26,6 +28,7 @@ TrieNode.prototype = {
 function SuffixTrie() {
     this.root = new TrieNode();
 }
+
 
 SuffixTrie.prototype = {
     constructor : SuffixTrie,
