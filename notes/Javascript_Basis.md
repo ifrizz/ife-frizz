@@ -13,17 +13,13 @@
 ## Loop through arrays
 Please please don't use old-fachioned for loop if you can use foreach -- oop professor
 
-**ForEach**
-
-- Available only for looping in Array objects.
+**ForEach**: Available only for looping in Array objects.
 
 ```JavaScript
 array.forEach( function(item) { });
 ```
 
-**for-in**
-
-Loop through properties of an object
+**for-in**: Loop through properties of an object
 
 ```JavaScript
 for (key in array) { }
@@ -34,9 +30,7 @@ Equivalent to this in java:
 for (key : map.keyset()) { }
 ```
 
-**for-of**
-
-New feature. Works only on collections with `[iterator]` property
+**for-of**: New feature. Works only on collections with `[iterator]` property
 
 ```JavaScript
 for (item of array) { }
@@ -49,10 +43,20 @@ for (item of array) { }
 var array;
 array["key"] = "data";
 ```
-
 ——快看我望着脚本语言的惊愕神情（你咬我呀
 
-## Details
+这个长得很像array的东西不是array。重要的话不说三遍。比如：
+
+```
+var map = [];
+map["a"] = 1; map["b"] = 2; map["c"] = 3;
+console.log(map.length);
+```
+此时输出 map.length = 0
+
+因此这个map无法用传统`for-loop`和`forEach`来遍历，请使用`for-in`
+
+## yDetails
 
 **== vs. ===**
 
