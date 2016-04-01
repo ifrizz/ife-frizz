@@ -52,4 +52,9 @@ function init () {
             }
         }
     }
+
+    // add listener to text input
+    var input = document.getElementById("search");
+    input.addEventListener('input', function(event){ search(input.value) });
+
 }

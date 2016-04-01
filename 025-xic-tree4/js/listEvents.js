@@ -72,7 +72,12 @@ function unfold (elem) {
 // searching
 function search (input) {
     if (input=="") {
-
+        resetMenu();
+    }
+    hideAllMenu();
+    var elems = trie.get(input.toLowerCase());
+    for (var i in elems) {
+        showMenuNode(elems[i]);
     }
 }
 
@@ -80,6 +85,28 @@ function search (input) {
 function resetMenu() {
     var divs = menuRoot.querySelectorAll("div");
     for (var i in divs) {
-        
+        removeClass(divs[i], "hide");
+        if (hasClass(divs[i], "star"))
+            addClass(divs[i], "closs");
+        else
+            removeClass(divs[i], "closs");
+    }
+}
+
+// hide all
+function hideAllMenu() {
+    var divs = menuRoot.querySelectorAll("div");
+    for (var i in divs) {
+        removeClass(divs[i], "close");
+        addClass(divs[i], "hide");
+    }
+}
+
+// show node
+function showMenuNode(element) {
+    var elem = element;
+    while (elem != menuRoot) {
+        removeClass(elem, "hide");
+        elem = elem.parentNode;
     }
 }
