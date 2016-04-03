@@ -5,8 +5,6 @@ body{
     font-family: sans-serif;
 }
 
-/* nav bar */
-
 nav{
     top: 0px;
     width: 100%;
@@ -40,9 +38,6 @@ a.disabled{
     color: #CCCCCC;
 }
 
-
-/* article */
-
 article, aside{
     margin: 20px 30px;
     padding: 20px;
@@ -65,8 +60,6 @@ figure{
     padding: 10px;
     /* width: fit-content;  not-supported in Safari - any better idea? */
     width: 200px; /* set image width: 100% and fix container's width */
-
-
 }
 
 figure figcaption {
@@ -115,11 +108,6 @@ form div label {
     vertical-align: top; /* inline-block align top */
 }
 
-form div label + div {
-    display: inline-block;  /* cool! */
-    
-}
-
 button[type="submit"] {
     background-color: #184DEC;
     color: #fff;
@@ -134,7 +122,7 @@ footer {
     background-color: #6F6F6F;
     color: #fff;
     text-align: center;
-    line-height: 50px; /* use line-height instead of height to line text*/
+    line-height: 50px; /* use line-height instead of height to align text*/
 }
 
 footer p {
