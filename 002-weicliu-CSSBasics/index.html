@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>CSS Basics</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="icon" href="../img/icon1.ico">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<a href="#"><div class="nav-brand"><img src="../frizz.png" height="50px"></div></a>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#" class="disabled">Contact</a></li>
+			</ul>
+		</nav>
+
+	</header>
+
+
+	<article>
+		<h2>Article heading 1</h2>
+		<h3>Article heading 2</h3>
+		<p>
+			<span class="article-tag">AUTHOR</span>
+			<span class="article-tag">DATE</span>
+		</p>
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus quam, semper et iaculis in, facilisis tincidunt mauris. Vestibulum luctus, lectus a pharetra feugiat, justo nisi cursus tellus, eget condimentum lectus turpis non nunc. Etiam pellentesque pulvinar aliquam. Integer efficitur, dui eget cursus dapibus, risus orci luctus ante, a molestie risus augue at ligula. Phasellus rhoncus ligula id turpis feugiat mattis. Vestibulum iaculis felis sed justo cursus, ac dignissim <a href="https://github.com/weicliu/ife-frizz">orci consectetur.</a> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vel felis sit amet massa posuere tincidunt quis a risus. Aliquam ultricies malesuada posuere.
+		</p>
+
+		<p>
+			Nam sit amet mauris tempor, elementum ligula euismod, consequat lacus. Ut sed enim ac sapien molestie condimentum vel et lacus. Maecenas a urna in ligula faucibus venenatis. Phasellus in leo sagittis, porta nibh non, elementum ipsum. Pellentesque nec libero purus. Curabitur felis neque, mollis eget elit convallis, vehicula tempus ipsum. Sed eu sapien et mi feugiat vehicula ac ut est.
+		</p>
+
+		<img src="../frizz.png" height="200px" alt="frizz logo">
+	</article>
+
+	<article>
+		<h2>Second article heading 1</h2>
+		<p>
+			<span class="article-tag">AUTHOR</span>
+			<span class="article-tag">DATE</span>
+		</p>
+
+		<p>
+			Nullam ut rhoncus nisi, eu rutrum nibh. Aliquam erat volutpat. Nulla ut quam faucibus, sollicitudin mauris ac, varius purus. Phasellus massa quam, luctus at molestie quis, lobortis eu nulla. Duis dictum turpis in massa dictum luctus. Duis ultrices, sem vitae consectetur tempor, metus dolor vehicula metus, nec fringilla dui metus sed nulla. Sed placerat lectus in libero sagittis pulvinar. Etiam malesuada ipsum at justo bibendum, vel venenatis massa vehicula. Aenean eget rutrum augue, <b>vel sagittis nunc</b>.
+		</p>
+
+		<h3>Our logo</h3>
+		<figure>
+			<figcaption>Nice logo</figcaption>
+			<img src="../frizz.png" alt="frizz logo">
+		</figure>
+		<figure>
+			<figcaption>Nice logo</figcaption>
+			<img src="../frizz.png" alt="frizz logo">
+		</figure>
+	</article>
+
+	<article>
+		<h2>Third article heading 1</h2>
+		<p>
+			<span class="article-tag">AUTHOR</span>
+			<span class="article-tag">DATE</span>
+		</p>
+
+		<ol>
+			<li>Item 1</li>
+			<li>Item 2</li>
+			<li>Item 3</li>
+		</ol>
+
+		<p>There is a table below.</p>
+
+		<table border="1">
+			<caption>Table1</caption>
+			<thead>
+				<tr>
+					<th>Header1</th>
+					<th>Header2</th>
+					<th>Header3</th>
+				</tr>
+			</thead>
+
+			<tbody><tr><td>Cotent</td><td>Cotent</td><td><a href="#">Oper</a></td></tr></tbody>
+			<tbody><tr><td>Cotent</td><td>Cotent</td><td><a href="#">Oper</a></td></tr></tbody>
+			<tbody><tr><td>Cotent</td><td>Cotent</td><td><a href="#">Oper</a></td></tr></tbody>
+
+			<tfoot>
+				<tr><td>total</td><td colspan="2">1000$</td></tr>
+			</tfoot>
+
+		</table>
+
+	</article>
+
+	<aside>
+		<h3>This is a side bar.</h3>
+
+		<form>
+			<div>
+				<label for="mail">Email</label>
+				<input type="email" id="email">
+			</div>
+
+			<div>
+				<label for="password">Password</label>
+				<input type="password" id="password">
+			</div>
+			<div>
+				<label for="gender">Gender</label>
+				  <input type="radio" name="gender" value="male" checked> Male
+				  <input type="radio" name="gender" value="female"> Female
+				  <input type="radio" name="gender" value="other"> Other
+			</div>
+			<div>
+				<label for="city">City</label>
+				<select id="city">
+					<option value="SanDiego" selected>San Diego</option>
+					<option value="Pittsburgh">Pittsburgh</option>
+					<option value="Beijing">Beijing</option>
+				</select>
+			</div>
+			<div>
+				<label for="Hobby">Hobby</label>
+				<input type="checkbox">Sports
+				<input type="checkbox">Arts
+				<input type="checkbox">Science
+				<input type="checkbox">Other
+
+			</div>
+			<div>
+				<label for="ps">Personal statement</label>
+				<textarea id="ps" cols="45" rows="8" placeholder="Give us an introduction..."></textarea>
+			</div>
+			<div>
+				<button type="submit">Submit</button>
+			</div>
+		</form>
+	</aside>
+
+	<footer>
+		<p>Copyrights &copy; Frizz</p>
+	</footer>
+
+</body>
+</html>

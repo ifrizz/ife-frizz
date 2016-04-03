@@ -1,0 +1,143 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #F0F0F0;
+    font-family: sans-serif;
+}
+
+/* nav bar */
+
+nav{
+    top: 0px;
+    width: 100%;
+    background-color: #6F6F6F;
+    display: inline-block;
+}
+
+.nav-brand{
+    float: left;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+nav ul{
+    float: right;
+    list-style: none;
+    margin-top: 25px;
+}
+
+nav ul li{
+    float: left;
+    margin-right: 30px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fafafa;
+}
+
+a.disabled{
+    color: #CCCCCC;
+}
+
+
+/* article */
+
+article, aside{
+    margin: 20px 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px #616161;
+}
+
+article h3{
+    color: #5E5E5E;
+}
+
+.article-tag{
+    font-size: 0.8em;
+    color: #9D9D9D;
+}
+
+figure{
+    border: 1px solid #ddd;
+    padding: 10px;
+    /* width: fit-content;  not-supported in Safari - any better idea? */
+    width: 200px; /* set image width: 100% and fix container's width */
+
+
+}
+
+figure figcaption {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+figure img {
+    width: 100%;
+}
+
+table {
+    width: 60%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+table th, table td {
+    padding: 5px;
+    text-align: center;
+}
+
+thead {
+    background-color: #000;
+    color: #fff;
+}
+
+tfoot {
+    background-color: #BFBFBF;
+}
+
+aside h3 {
+    padding-left: 10px;
+    border-left: 3px solid #7F7F7F;
+}
+
+form div {
+    padding: 10px;
+}
+
+form div label {
+    display: inline-block;  /* cool! */
+    width: 30%;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top; /* inline-block align top */
+}
+
+form div label + div {
+    display: inline-block;  /* cool! */
+    
+}
+
+button[type="submit"] {
+    background-color: #184DEC;
+    color: #fff;
+    width: 100%;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+footer {
+    background-color: #6F6F6F;
+    color: #fff;
+    text-align: center;
+    line-height: 50px; /* use line-height instead of height to line text*/
+}
+
+footer p {
+    margin: 0;
+    display: block;
+}
