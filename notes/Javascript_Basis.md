@@ -73,3 +73,9 @@ sizeof(arr);    // sizeof(arr) = 1
 
 - `==`: convert different types before comparing 
 - `===`: doesn't convert types. if two objects have different types, they are not equal.
+
+```javascript
+console.log(1 == "1"); // true
+console.log(1 === "1"); // false
+
+```
