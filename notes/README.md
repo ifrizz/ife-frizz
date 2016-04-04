@@ -1,6 +1,8 @@
 ﻿# 笔记存放地
 
-## HTML, CSS
+## 第一阶段：HTML, CSS
+
+* [第一阶段总结](level1.md)
 
 * [HTML基础](HTML_notes.md)
 
@@ -12,7 +14,7 @@
 
 * [Newspaper Layout](newspaper_layout.md)
 
-## JavaScript
+## 第二阶段：JavaScript
 
 * [JavaScript 基础与细节](Javascript_Basis.md)
 
