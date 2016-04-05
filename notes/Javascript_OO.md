@@ -92,18 +92,22 @@ JavaScript中，所有Constructor原型对象都有一个prototype属性，指�
 
 这个prototype的所有属性和方法，都会被实例对象继承。（// 搞的好像继承abstract class一样）
 
-```
+```javascript
 function Cat (name, color) {
     this.name = name;
     this.color = color;
 }
 Cat.prototype.type = "喵科动物";
 Cat.prototype.eat = function() { alert("eat cupcakes") };
+
+// *说人话：
+miao = new Cat("喵酱", "black");
+console.log(Cat.prototype.eat === miao.eat()); // true
 ```
 
 此处可将prototype理解为成员函数与static成员变量
 
-类似于CPP，在编译时，成员函数存储在类的公用内存中，每个对象所占用的空间只是成员变量所占用的存储空间。
+类似于CPP，在编译时，成员函数存储在类的公用内存中，每个对象所占用的空间只是成员变量所占用的存储空间。（*）
 
 // 省出这么多内存觉得自己整个人都有钱了（挺胸
 
