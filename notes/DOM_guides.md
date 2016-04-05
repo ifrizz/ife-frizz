@@ -65,14 +65,19 @@ var style = window.getComputedStyle(elem1, null);
 **Bubbling**
 
 * 给父元素添加点击事件 -> 点击任何一个子元素都会该触发
+
 * 这是一个Bubbling的过程：触发`target`子元素的事件一层一层地对父元素触发，形象地表现为向上冒泡
+
 * 如果父子元素都注册了这个事件，如果触发子元素，在冒泡的过程中，`event.target`始终为子元素，但`this`会随着bubbling的过程而变化。
+
 * 用 `event.stopPropagation()` 来停止冒泡
 
 **Capturing**
 
 * 实际上 "event processing" 有两个阶段：先是 "captures down" 然后再 "bubbles up".
-* 所有的 event handling 的方法都忽略了 Capturing 这个阶段（关着门哭...（谁叫你这么多事
+
+* 所有的 event handling 的方法都忽略了 Capturing 这个阶段（关起门哭...（谁叫你这么多事
+
 * 我不服：`element.addEventListener(type, handler, *phase*)` 中 `phase = true` 来将handler设为capturing phase
 
 > 动画DEMO戳[我](http://javascript.info/tutorial/bubbling-and-capturing)
