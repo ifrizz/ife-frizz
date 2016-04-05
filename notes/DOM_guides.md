@@ -14,7 +14,7 @@ Three ways to register event listener
 
 [**Examples**](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples)
 
-```javascirpt
+```javascript
 // #1 & 3
 element.height
 element.style.height/color/fontSize
@@ -36,7 +36,8 @@ for(var i = 0; i < ss.length; i++) {
 }
 
 // #5 - Event Propagation
-event.stopPropagation(); // Prevents further propagation of the current event in the bubbling phase. 就是说，不会把对当前元素的事件传递到其父元素。（详见后面的 #Bubbling and capturing ）
+event.stopPropagation(); 
+// 不会把对当前元素的事件传递到其父元素。（详见后面的 #Bubbling and capturing ）
 
 // #6 - getComputedStyle
 // 获得不是由css或者JS设置的styles (比如自动宽度等)
