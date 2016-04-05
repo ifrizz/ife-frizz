@@ -22,6 +22,8 @@
 
 * [DOM 常用API](DOM_APIs.md)
 
+* [DOM的一些细节](DOM_guides.md)
+
 * [jQuery API 给开始写jQuery的苦逼小伙伴w](jQuery_APIs.md)
 
 
