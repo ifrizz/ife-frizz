@@ -8,6 +8,7 @@ document.getElementById (id);                // Get element by id
 document.getElementsByTagName (name);        // Get elements by tag
 document.getElementsByClassName (name);      // Get elements by class
 document.querySelectorAll ("p.intro");       // Returns all `<p>` elements with `class="intro"`
+        .querySelector(selectors);           // Returns the first element matching the selectors
 ```
 #### Changing HTML Elements
 ```
