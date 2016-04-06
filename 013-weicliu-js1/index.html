@@ -20,10 +20,16 @@
   在事件处理函数中
   获取aqi-input输入的值，并显示在aqi-display中
   */
-  
+
   var button = document.getElementById('button');
   var input = document.getElementById('aqi-input');
   var span = document.getElementById('aqi-display');
+
+  input.onkeypress = function(e){
+    if (e.keyCode == 13){
+      button.click(); // 回车触发click事件
+    }
+  }
 
   button.onclick = function(e){
     var inputValue = +input.value;
