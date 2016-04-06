@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Command Box</title>
+    <link rel="shortcut icon" href="../img/icon4.ico">
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body onload="init()">
+<div class="content clearfix">
+    <div id="maze-container">
+    </div>
+    <div class="commander-container">
+        <div class="commander-hint">
+            <span>[MOVE] GO, TRA, MOV</span>
+            <span>[DIRECT] LEF, TOP, RIG, BOT</span>
+            <span>[ACTION] BUILD, BRU color, MOV TO x, y</span>
+        </div>
+        <div class="commander">
+            <div class="commander-lines-wrapper">
+                <div class="commander-lines">
+                    <div class="commander-lines-item">1</div>
+                </div>
+            </div>
+            <div class="conmander-marks-wrapper">
+                <div class="commander-marks">
+                    <div class="commander-mark-item>"></div>
+                </div>
+            </div>
+            <div class="commander-history">old code</br>old code</div>
+            <textarea title="command" class="commander-editor" spellcheck="false"></textarea>
+        </div>
+    </div>
+</div>
+<script src="js/map.js"></script>
+<script src="js/action.js"></script>
+<script src="js/manager.js"></script>
+</body>
+</html>
