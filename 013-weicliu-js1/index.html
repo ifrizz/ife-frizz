@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+(function() {
+  /*
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  */
+  
+  var button = document.getElementById('button');
+  var input = document.getElementById('aqi-input');
+  var span = document.getElementById('aqi-display');
+
+  button.onclick = function(e){
+    var inputValue = +input.value;
+    span.innerHTML = isNaN(inputValue) || inputValue <= 0 ? "请输入正数" : inputValue;
+  };
+
+       /*
+        * Test Cases
+        * '' -> '请输入正数'
+        * '0' -> 0
+        * '2' -> 2
+        * '.2' -> 0.2
+        * '0xA' -> 10
+        * 'X' -> '请输入正数'
+        * 'X0' -> '请输入正数'
+        * '0X' -> '请输入正数'
+        * ‘-2’ -> '请输入正数'
+        *
+        * 参考自 http://ife.baidu.com/review/detail?workId=8034
+        * */
+
+})();
+
+</script>
+</body>
+</html>
