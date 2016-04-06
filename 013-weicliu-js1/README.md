@@ -7,4 +7,5 @@
 * `NaN` -  a property of the global object, Not-A-Number // 又是一个魔性的东西
 	* 每个 `NaN` 都不一样 （`NaN ===/== NaN` // both false）
 	* `v !== v` 只对 `NaN` 为 true
+
 * `isNaN()` 可用来判断是否为 Number
