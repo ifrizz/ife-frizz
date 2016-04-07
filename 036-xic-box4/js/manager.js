@@ -6,11 +6,12 @@ var Config = {
     WALL_COLOR: '#333'
 };
 
-var Main = (function(){
+var Control = (function(){
     init();
 
     function init() {
         Map(Config.COLUMN, Config.ROW);
         Square(document.getElementById('maze-container'));
+        CommandEditor();
     }
 })();

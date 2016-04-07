@@ -92,7 +92,7 @@ body {
 .commander-lines-item.success { background-color: #27ae60; }
 .commander-lines-item.warning { background-color: #f39c12; }
 .commander-history, .commander-editor {
-    font-size: 16px;
+    font-size: 14px;
     width: calc(100% - 40px);
     box-sizing: border-box;
     border: 0;
@@ -108,7 +108,7 @@ body {
 }
 .commander-editor {
     border-radius: 0 4px 4px 0;
-    padding: 5px 5px 5px 5px;
+    padding: 0 5px 5px 5px;
 }
 p {
     margin: 15px;
