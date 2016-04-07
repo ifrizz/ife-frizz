@@ -1,3 +1,3 @@
 var CommandEditor = function () {
-    var $
+    var $line-wrapper
 }

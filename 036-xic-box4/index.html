@@ -6,15 +6,14 @@
     <link rel="shortcut icon" href="../img/icon4.ico">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
-<body onload="init()">
+<body>
 <div class="content clearfix">
     <div id="maze-container">
     </div>
     <div class="commander-container">
         <div class="commander-hint">
-            <span>[MOVE] GO, TRA, MOV</span>
-            <span>[DIRECT] LEF, TOP, RIG, BOT</span>
-            <span>[ACTION] BUILD, BRU color, MOV TO x, y</span>
+            <button id="btn-build-wall">造墙技术哪家萌，牧童遥指西土城</button>
+            <button id="btn-reset">回炉重造</button>
         </div>
         <div class="commander">
             <div class="commander-lines-wrapper">
@@ -27,13 +26,23 @@
                     <div class="commander-mark-item>"></div>
                 </div>
             </div>
-            <div class="commander-history">old code</br>old code</div>
+            <div class="commander-history"></div>
+
             <textarea title="command" class="commander-editor" spellcheck="false"></textarea>
         </div>
     </div>
 </div>
+    <p>GO X: 前进X格</p>
+    <p>TUN LEF: 向左转</p>
+    <p>TUN RIG: 向右转</p>
+    <p>TUN BAC: 向后转</p>
+    <p>TRA [LEF | TOP | RIG | BOT] X: 向指定方向移动X格</p>
+    <p>MOV [LEF | TOP | RIG | BOT] X: 向指定方向转身并移动X格</p>
+    <p>BIUD: 在面前修墙</p>
+    <p>BRU #color: 给面前的墙上色</p>
+    <p>MOV TO x y [BFS | BEST | A*]: 指定寻路算法，移动至指定坐标
 <script src="js/map.js"></script>
-<script src="js/action.js"></script>
+<script src="js/square.js"></script>
 <script src="js/manager.js"></script>
 </body>
 </html>

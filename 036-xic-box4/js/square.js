@@ -1,6 +1,6 @@
-var Action = function(container) {
-    var x = Math.floor(Math.random() * Config.column);
-    var y = Math.floor(Math.random() * Config.row);
+var Square = function(container) {
+    var x = Math.floor(Math.random() * Config.COLUMN);
+    var y = Math.floor(Math.random() * Config.ROW);
     var rotation = Math.floor(Math.random() * 4) * 90;
     var square = create();
     update();
@@ -13,16 +13,16 @@ var Action = function(container) {
     }
 
     function update() {
-        square.style.left = x * Config.width + 'px';
-        square.style.top = y * Config.height + 'px';
+        square.style.left = x * Config.WIDTH + 'px';
+        square.style.top = y * Config.HEIGHT + 'px';
         square.style.transform = 'rotate(' + rotation + 'deg)';
     }
 
     function move(step) {
         switch(rotation / 90) {
         case 0: y = step > y ? 0 : y - step; break; // up
-        case 1: x = x + step >= Config.column ? Config.column-1 : x + step; break; // right
-        case 2: y = y + step >= Config.row ? Config.row-1 : y + step; break;
+        case 1: x = x + step >= Config.COLUMN ? Config.COLUMN-1 : x + step; break; // right
+        case 2: y = y + step >= Config.ROW ? Config.ROW-1 : y + step; break;
         case 3: x = step > x ? 0 : x - step; break;
         default: break;
         }
