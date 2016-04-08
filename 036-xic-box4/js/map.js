@@ -3,7 +3,23 @@ var Map = function(c, r){
     var column = c;
     var row = r;
     var box = [];
+    var wallCount = 0;
     init();
+
+    return {
+        column: column,
+        row: row,
+        wallCount: wallCount,   // number of walls in the map
+
+        /* isWall (pos): return if a wall is at the position {x, y} */
+        isWall: isWall,
+
+        /* buildWall (pos): build a wall at position {x, y} */
+        buildWall: buildWall,
+
+        /* reset () : reset color of all blocks */
+        reset: reset
+    };
 
     function init() {
         container.style.width = c * Config.WIDTH + 'px';
@@ -28,34 +44,40 @@ var Map = function(c, r){
         return div;
     }
 
-    function getBox(y, x) {
-        return box[y * column + x];
+    function getBox(pos) {
+        return box[pos.y * column + pos.x];
     }
 
-    function setColor(y, x, color) {
-        getBox(y, x).style.backgroundColor = color;
+    function setColor(pos, color) {
+        var box = getBox(pos);
+        box.style.backgroundColor = color;
+        box.style.border = '1px solid ' + color;
     }
 
-    function setType(y, x, type) {
-        getBox(y, x).dataset.type = type;
+    function setType(pos, type) {
+        getBox(pos).dataset.type = type;
     }
 
-    function getType(y, x) {
-        var box = getBox(y, x);
+    function getType(pos) {
+        var box = getBox(pos);
         return box && box.dataset.type;
     }
 
-    function buildWall(y, x) {
-        setType(y, x, 'wall');
-        setColor(y, x, Config.WALL_COLOR);
+    function buildWall(pos) {
+        if (!isWall(pos))
+            wallCount += 1;
+        setType(pos, 'wall');
+        setColor(pos, Config.WALL_COLOR);
     }
 
-    function isWall(y, x) {
-        return getType(y, x) === 'wall';
+    function isWall(pos) {
+        return getType(pos) === 'wall';
     }
 
-    return {
-        column: column,
-        row: row,
-    };
+    function reset() {
+        for (var i in box) {
+            box[i].style.backgroundColor = '';
+            box[i].style.border = '';
+        }
+    }
 }

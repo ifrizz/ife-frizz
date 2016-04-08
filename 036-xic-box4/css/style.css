@@ -40,6 +40,8 @@ body {
     border-top: 8px solid indigo;
     position: absolute;
 }
+
+
 /* commander */
 .commander-container {
     position: absolute;
@@ -47,13 +49,13 @@ body {
     width: 400px;
     margin: 9px;
 }
-.commander-hint {
+.commander-menu {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
     color: #444;
 }
-.commander-hint button {
+.commander-menu button {
     flex-grow: 1;
     margin: 5px;
     background: #ccc;
@@ -62,14 +64,17 @@ body {
     border-radius: 3px;
     line-height: 35px;
 }
-.commander-hint button:hover{
+.commander-menu button:hover{
     background:  #2F79BA;
 }
+
+/* commander editor */
 .commander {
     height: 365px;
     overflow-y: scroll;
 }
 .commander-lines-wrapper,
+.commander-marks-wrapper,
 .commander-editor {
     float: left;
     line-height: 20px;
@@ -77,6 +82,7 @@ body {
     color: #222;
 }
 .commander-lines-wrapper {
+    float:left;
     border-radius: 4px 0 0 4px;
     background-color: #D4D4D6;
     width: 40px;
@@ -86,6 +92,17 @@ body {
     box-sizing: border-box;
     cursor: default;
 }
+.commander-marks-wrapper {
+    float: left;
+    width: 20px;
+    padding-top: 5px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    cursor: default;
+    font-size: 12px;
+    background-color: #F7F8F9;
+    color: #aaa;
+}
 .commander-lines { position: relative }
 .commander-lines-item { padding-right: 5px }
 .commander-lines-item.error { background-color: #ea6153; }
@@ -93,11 +110,11 @@ body {
 .commander-lines-item.warning { background-color: #f39c12; }
 .commander-history, .commander-editor {
     font-size: 14px;
-    width: calc(100% - 40px);
+    width: calc(100% - 60px);
     box-sizing: border-box;
     border: 0;
-    outline: none;
     margin: 0;
+    outline: none;
     background-color: #F7F8F9;
     resize: none;
 }
@@ -110,6 +127,15 @@ body {
     border-radius: 0 4px 4px 0;
     padding: 0 5px 5px 5px;
 }
+.commander-history p {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    color: #aaa;
+}
 p {
-    margin: 15px;
+    margin: 0 0 0 15px;
+    font-size: 14px;
+    line-height: 20px;
 }

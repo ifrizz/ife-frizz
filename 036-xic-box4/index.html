@@ -11,7 +11,7 @@
     <div id="maze-container">
     </div>
     <div class="commander-container">
-        <div class="commander-hint">
+        <div class="commander-menu">
             <button id="btn-build-wall">造墙技术哪家萌，牧童遥指西土城</button>
             <button id="btn-reset">回炉重造</button>
         </div>
@@ -19,13 +19,11 @@
             <div class="commander-lines-wrapper">
                 <div class="commander-lines">
                     <div class="commander-lines-item">1</div>
-                    <div class="commander-lines-item">1</div>
-                    <div class="commander-lines-item">1</div>
                 </div>
             </div>
-            <div class="conmander-marks-wrapper">
+            <div class="commander-marks-wrapper">
                 <div class="commander-marks">
-                    <div class="commander-mark-item>"></div>
+                    <div class="commander-mark-item">&gt;&gt;</div>
                 </div>
             </div>
             <div class="commander-history"></div>
@@ -44,7 +42,8 @@
     <p>MOV TO x y [BFS | BEST | A*]: 指定寻路算法，移动至指定坐标</p>
 <script src="js/map.js"></script>
 <script src="js/square.js"></script>
-<script src="js/editor.js"></script>
+<script src="js/command-editor.js"></script>
+<script src="js/command-executor.js"></script>
 <script src="js/manager.js"></script>
 </body>
 </html>
