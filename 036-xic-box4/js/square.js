@@ -5,7 +5,7 @@ var Square = function(container) {
      * 3: down
      * 4: left
     */
-    var x, y, rotation;
+    var x, y, rotation, degree;
     var square = create();
     reset();
 
@@ -42,7 +42,9 @@ var Square = function(container) {
     function update() {
         square.style.left = x * Config.WIDTH + 'px';
         square.style.top = y * Config.HEIGHT + 'px';
-        square.style.transform = 'rotate(' + (rotation-1) * 90 + 'deg)';
+        // calculate degree
+
+        square.style.transform = 'rotate(' + (degree-90) + 'deg)';
     }
 
     // move [arg0] steps to [arg1] direction
@@ -61,10 +63,16 @@ var Square = function(container) {
     // rotate [arg0] in degree angle
     function rotateTo(angle) {
         angle = angle < 0 ? rotation + angle : angle;
-        while (angle > 4)
-            angle -= 4;
-        while (angle < 1)
-            angle += 4;
+        while (angle > 4) angle -= 4;
+        while (angle < 1) angle += 4;
+
+        // update degree
+        var rot = angle - rotation;
+        while (rot < -2) rot += 4;
+        while (rot >  2) rot -= 4;
+        degree += rot * 90;
+
+        // update rotation
         rotation = angle;
         update();
     }
@@ -76,7 +84,7 @@ var Square = function(container) {
 
     // return the position of square (read only)
     function pos() {
-        return new V2(x, y);
+        return {x:x, y:y};
     }
 
     // reset random position and rotation
@@ -84,6 +92,7 @@ var Square = function(container) {
         x = Math.floor(Math.random() * Config.COLUMN);
         y = Math.floor(Math.random() * Config.ROW);
         rotation = Math.floor(Math.random() * 4) + 1;
+        degree = rotation * 90;
         update();
     }
 

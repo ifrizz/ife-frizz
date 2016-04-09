@@ -5,43 +5,25 @@ var Config = {
     COLUMN: 10,
     ROW: 10,
     WALL_COLOR: '#555',
-    INTERVAL: 100
+    INTERVAL: 200,
+    LOG: {
+        ERROR_PATH:  "走呀走呀走不到（●>∀<●）",
+        ERROR_WALL:  "此处禁止违章建筑(｡ŏ_ŏ)",
+        ERROR_COLOR: "此处禁止涂鸦(#`Д´)ﾉ",
+        ERROR_SQUARE: "撞墙惹 (╯°Д°)╯︵ ┻━┻"
+    }
 };
-
-// Vector2
-var V2 = function(x, y) {
-    this.x = x;
-    this.y = y;
-}
-V2.prototype.clone = function() {
-    return new V2(this.x, this.y);
-}
-V2.prototype.equal = function(pos) {
-    return pos && this.x===pos.x && this.y===pos.y;
-}
-V2.prototype.to = function(dst) {
-    var x = dst.x - this.x;
-    var y = dst.y - this.y;
-    if (x && !y)
-        return [x > 0 ? 2 : 4, Math.abs(x)];
-    else if (y && !x)
-        return [y > 0 ? 3 : 1, Math.abs(y)];
-    else
-        return [0, 0];
-}
-V2.prototype.add = function(pos) {
-    if (!pos) return this.clone();
-    return new V2(this.x + pos.x, this.y + pos.y);
-}
 
 // main manager
 var Manager = (function() {
-    // constructor
+
+    // ---------------------- API -----------------------
     var manager = {
+        log: log,
         moveSquare: moveSquare,
         getPath: getPath,
         buildWall: buildWall,
-        colorWall: colorWall
+        colorWall: colorWall,
     }
 
     // DOM & listeners
@@ -53,33 +35,18 @@ var Manager = (function() {
     // initialize
     var map = Map(Config.COLUMN, Config.ROW);
     var square = Square(document.getElementById('maze-container'));
-    var executor = Executor(manager);
+    var executor = Executor();
     var editor = CommandEditor(executor);
     var finder = Finder();
 
-    // generate a random position within the map
-    function randomPos(w, h) {
-        var x = Math.floor(Math.random() * w);
-        var y = Math.floor(Math.random() * h);
-        return {x:x, y:y};
-    }
+    return manager;
 
-    // find an empty place to build a wall
-    // if no such place, return
-    function randomWall() {
-        if (map.wallCount >= map.column * map.row - 1)
-            return;
-        var pos = randomPos(map.column, map.row);
-        while (square.atPos(pos) || map.isWall(pos)) {
-            pos = randomPos(map.column, map.row);
-        }
-        buildWall(pos);
-    }
+    // ---------------- public methods -------------------
 
-    // reset everything www
-    function reset() {
-        map.reset();
-        square.reset();
+    // log
+    function log(str) {
+        var event = new CustomEvent('log', {'detail':str});
+        window.dispatchEvent(event);
     }
 
     // move the square to a proper position
@@ -112,5 +79,32 @@ var Manager = (function() {
     function colorWall(color, pos) {
         pos = pos || square.getFront();
         map.colorWall(pos, color);
+    }
+
+    // ---------------- private methods -------------------
+
+    // generate a random position within the map
+    function randomPos(w, h) {
+        var x = Math.floor(Math.random() * w);
+        var y = Math.floor(Math.random() * h);
+        return {x:x, y:y};
+    }
+
+    // find an empty place to build a wall
+    // if no such place, return
+    function randomWall() {
+        if (map.wallCount >= Config.COLUMN * Config.ROW - 1)
+            return;
+        var pos = randomPos(Config.COLUMN, Config.ROW);
+        while (square.atPos(pos) || map.isWall(pos)) {
+            pos = randomPos(Config.COLUMN, Config.ROW);
+        }
+        buildWall(pos);
+    }
+
+    // reset everything www
+    function reset() {
+        map.reset();
+        square.reset();
     }
 })();

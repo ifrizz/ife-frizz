@@ -39,7 +39,7 @@ body {
     background: firebrick;
     border-top: 8px solid indigo;
     position: absolute;
-    transition: all 0.1s;
+    transition: all 0.3s;
 }
 
 

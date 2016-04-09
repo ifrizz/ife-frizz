@@ -1,4 +1,5 @@
 /*
+Notes:
 
 RegEx.test(string) - return true / false
 str.match(RegEx) - return [matching string, substr1, substr2, ..., matching index, org str]
@@ -14,50 +15,59 @@ array.shift() - dequeue from head
 +str - str2Int
 */
 
-var Executor = function (Manager) {
-    var manager = Manager;
+var Executor = function () {
     var actionQueue = [];
     var timer;
 
+    // ---------------------- pattern list -----------------------
+
+    var tunmap = {"lef" : -1, "bac": -2, "rig":-3};
+    var dirmap = {"lef" : 4, "top": 1, "rig":2, "bot":3};
+
     var validator = [{
             pattern: /^go\s+(\d+)\s*/,
-            action: [function(step) { manager.moveSquare(+step, 0, 0); }]
+            action: [function(step) { Manager.moveSquare(+step, 0, 0); }]
         },{
             pattern: /^tun\s+(lef|rig|bac)\s*/,
-            action: [function(dir) {
-                    var dirmap = {"lef" : -1, "bac": -2, "rig":-3};
-                    manager.moveSquare(0, 0, dirmap[dir]);
-                }]
+            action: [function(tun) { Manager.moveSquare(0, 0, tunmap[dir]); }]
         },{
             pattern: /^tra\s+(lef|top|rig|bot)\s+(\d+)\s*/,
-            action: [function(dir, step) {
-                    var dirmap = {"lef" : 4, "top": 1, "rig":2, "bot":3};
-                    manager.moveSquare(+step, dirmap[dir], 0);
-                }]
+            action: [function(dir, step) { Manager.moveSquare(+step, dirmap[dir], 0); }]
         },{
             pattern: /^mov\s+(lef|top|rig|bot)\s+(\d+)\s*/,
             action: [
-                function(dir, step) {
-                    var dirmap = {"lef" : 4, "top": 1, "rig":2, "bot":3};
-                    manager.moveSquare(0, 0, dirmap[dir]);
-                },
-                function(dir, step) {
-                    var dirmap = {"lef" : 4, "top": 1, "rig":2, "bot":3};
-                    manager.moveSquare(+step, dirmap[dir], 0);
-                }]
+                function(dir, step) { Manager.moveSquare(0, 0, dirmap[dir]); },
+                function(dir, step) { Manager.moveSquare(+step, dirmap[dir], 0); }]
         },{
             pattern: /^biud\s*/,
-            action: [function() { manager.buildWall(); }]
+            action: [function() { Manager.buildWall(); }]
         },{
             pattern: /^bru\s+(#[0-9a-e]{6}|#[0-9a-e]{3})\s*/,
-            action: [function(color) { manager.colorWall(color); }]
+            action: [function(color) { Manager.colorWall(color); }]
         },{
-            pattern: /^mov to\s+(\d+),\s*(\d+)\s+(a\*|bfs|best)/,
-            action: [function(x, y, type) { parsePath(manager.getPath(new V2(+x,+y), type)); }]
+            pattern: /^mov to\s+(\d+),\s*(\d+)\s+(a\*|bfs|best|dfs)/,
+            action: [function(x, y, type) { parsePath( Manager.getPath({x:+x, y:+y}, type)); }]
         },
     ];
 
-    function parse(input) {
+    // ---------------------- API -----------------------
+
+    return {
+        validateCommand: validateCommand,
+        parseCommand: parseCommand
+    }
+
+    // ---------------------- public methods -----------------------
+
+    function validateCommand(input) {
+        for (var i in validator) {
+            if (validator[i].pattern.test(input))
+                return true;
+        }
+        return false;
+    }
+
+    function parseCommand(input) {
         var matched;
         for (var i in validator) {
             if (validator[i].pattern.test(input)) {
@@ -71,40 +81,9 @@ var Executor = function (Manager) {
         execute();
     }
 
-    function parsePathNode(node) {
-        actionQueue.push({
-            action: function(dir) { manager.moveSquare(0, 0, dir); },
-            args: [node[0]]
-        }),
-        actionQueue.push({
-            action: function(dir, step) { manager.moveSquare(step, dir, 0); },
-            args: node
-        })
-    }
+    // ---------------------- private methods -----------------------
 
-    function parsePath(path) {
-        console.log(path);
-        /*
-        var last = path.shift(), cur, sum = last;
-        while(sum && path.length > 0) {
-            cur = path.shift();
-            if (!cur.equal(last)) {
-                actionQueue.push({action: validator[3].action[0], args: []})
-        }*/
-        for (var i in path) {
-            parsePathNode(path[i]);
-        }
-        execute();
-    }
-
-    function validate(input) {
-        for (var i in validator) {
-            if (validator[i].pattern.test(input))
-                return true;
-        }
-        return false;
-    }
-
+    // execute task queue
     function execute() {
         if (timer) return;
         var command = actionQueue.shift();
@@ -117,8 +96,36 @@ var Executor = function (Manager) {
         }, Config.INTERVAL);
     }
 
-    return {
-        validateCommand: validate,
-        parseCommand: parse
+    // bind moves in the same direction
+    function parsePath(path) {
+        if (!path) {
+            Manager.log(Config.LOG.ERROR_PATH);
+            return;
+        }
+        var last = path.shift(),
+            cur = last,
+            sum = [0, 0];
+        while(cur || path.length > 0) {
+            if (cur[0] != last[0] || sum[1] >= 3) {
+                parsePathNode(sum);
+                sum = [0, 0];
+            }
+            last = cur;
+            sum = [last[0], last[1] + sum[1]];
+            cur = path.shift();
+        }
+        parsePathNode(sum);
+        execute();
+    }
+
+    function parsePathNode(node) {
+        actionQueue.push({
+            action: function(dir) { Manager.moveSquare(0, 0, dir); },
+            args: [node[0]]
+        }),
+        actionQueue.push({
+            action: function(dir, step) { Manager.moveSquare(step, dir, 0); },
+            args: node
+        })
     }
 }
