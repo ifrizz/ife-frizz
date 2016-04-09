@@ -10,15 +10,14 @@ var Map = function(c, r){
         column: column,
         row: row,
         wallCount: wallCount,   // number of walls in the map
-
         /* isWall (pos): return if a wall is at the position {x, y} */
         isWall: isWall,
-
         /* buildWall (pos): build a wall at position {x, y} */
         buildWall: buildWall,
-
         /* reset () : reset color of all blocks */
-        reset: reset
+        reset: reset,
+        /* getMapInfo() */
+        getMapInfo: getMapInfo
     };
 
     function init() {
@@ -49,6 +48,8 @@ var Map = function(c, r){
     }
 
     function setColor(pos, color) {
+        if (!validatePos(pos))
+            return;
         var box = getBox(pos);
         box.style.backgroundColor = color;
         box.style.border = '1px solid ' + color;
@@ -64,6 +65,8 @@ var Map = function(c, r){
     }
 
     function buildWall(pos) {
+        if (!validatePos(pos))
+            return;
         if (!isWall(pos))
             wallCount += 1;
         setType(pos, 'wall');
@@ -79,5 +82,21 @@ var Map = function(c, r){
             box[i].style.backgroundColor = '';
             box[i].style.border = '';
         }
+    }
+
+    function validatePos(pos) {
+        return (pos.x >= 0 && pos.x < column && pos.y >= 0 && pos.y < row)
+    }
+
+    function getMapInfo() {
+        var mapInfo = [];
+        for (var i=0; i<row; i++) {
+            var item = [];
+            for (var j=0; j<column; j++) {
+                item.push(!isWall({x:j, y:i}));
+            }
+            mapInfo.push(item);
+        }
+        return {info:mapInfo, width:column, height:row};
     }
 }

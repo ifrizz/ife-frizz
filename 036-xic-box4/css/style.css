@@ -39,6 +39,7 @@ body {
     background: firebrick;
     border-top: 8px solid indigo;
     position: absolute;
+    transition: all 0.1s;
 }
 
 
@@ -104,10 +105,9 @@ body {
     color: #aaa;
 }
 .commander-lines { position: relative }
-.commander-lines-item { padding-right: 5px }
-.commander-lines-item.error { background-color: #ea6153; }
-.commander-lines-item.success { background-color: #27ae60; }
-.commander-lines-item.warning { background-color: #f39c12; }
+.commander-lines-item { padding-right: 10px }
+.error { background-color: #7D1328; color: #eee}
+
 .commander-history, .commander-editor {
     font-size: 14px;
     width: calc(100% - 60px);
