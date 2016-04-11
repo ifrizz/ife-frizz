@@ -1,13 +1,13 @@
 * {
-    font-family: Menlo, Consolas, monospace, "microsoft yahei";
+    font-family: "consolas", "microsoft yahei";
 }
 body {
-    width: 900px;
+    width: 1000px;
     margin: 20px auto;
 }
 .content {
     position: relative;
-    height: 460px;
+    height: 390px;
 }
 .clearfix:after {
     content:'';
@@ -24,36 +24,34 @@ body {
 .maze-block {
     display: block;
     box-sizing: border-box;
-    width: 42px;
-    height: 42px;
+    width: 5px;
+    height: 5px;
     border-bottom: 1px solid rgb(237,237,237);
     border-right: 1px solid rgb(237,237,237);
     float: left;
+    z-index: 10;
 }
-.maze-block-right { border-right: none; }
-.maze-block-bottom { border-bottom: none; }
 .square {
     display: block;
-    width: 42px;
-    height: 34px;
+    width: 5px;
+    height: 3px;
     background: firebrick;
-    border-top: 8px solid indigo;
+    border-top: 2px solid indigo;
     position: absolute;
-    transition: all 0.3s;
+    transition: all 0.1s;
+    z-index: 20;
 }
-
 
 /* commander */
 .commander-container {
     position: absolute;
-    left: 450px;
+    left: 530px;
     width: 400px;
     margin: 9px;
 }
 .commander-menu {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
     color: #444;
 }
 .commander-menu button {
@@ -71,9 +69,10 @@ body {
 
 /* commander editor */
 .commander {
-    height: 365px;
+    height: 270px;
     overflow-y: scroll;
 }
+
 .commander-lines-wrapper,
 .commander-marks-wrapper,
 .commander-editor {
@@ -134,8 +133,28 @@ body {
     padding: 0;
     color: #aaa;
 }
-p {
-    margin: 0 0 0 15px;
-    font-size: 14px;
+.instruction {
+    position: relative;
+    left: 540px;
+    top: 370px
+}
+.instruction p {
+    font-size: 12px;
     line-height: 20px;
+    margin: 0;
+}
+.setting {
+    font-size: 14px;
+    margin: 0 0 10px 10px;
+}
+
+#maze-position {
+    width: 300px;
+    display: block;
+    z-index: 100;
+    position: absolute;;
+    top: 535px;
+    left: 350px;
+    font-size: 12px;
+    text-align: right;
 }

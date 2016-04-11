@@ -1,18 +1,3 @@
-// global variables
-var Config = {
-    WIDTH: 42,
-    HEIGHT: 42,
-    COLUMN: 10,
-    ROW: 10,
-    WALL_COLOR: '#555',
-    INTERVAL: 200,
-    LOG: {
-        ERROR_PATH:  "走呀走呀走不到（●>∀<●）",
-        ERROR_WALL:  "此处禁止违章建筑(｡ŏ_ŏ)",
-        ERROR_COLOR: "此处禁止涂鸦(#`Д´)ﾉ",
-        ERROR_SQUARE: "撞墙惹 (╯°Д°)╯︵ ┻━┻"
-    }
-};
 
 // main manager
 var Manager = (function() {
@@ -24,20 +9,29 @@ var Manager = (function() {
         getPath: getPath,
         buildWall: buildWall,
         colorWall: colorWall,
+        reset: reset
     }
 
     // DOM & listeners
     var $btnWall = document.getElementById('btn-build-wall');
     var $btnReset = document.getElementById('btn-reset');
-    $btnWall.addEventListener('click', function(e){ randomWall() });
+    var $selectSize = document.getElementById('select-size');
+    var $selectDense = document.getElementById('select-density');
+
+    $btnWall.addEventListener('click', function(e){ createMaze() });
     $btnReset.addEventListener('click', function(e){ reset() });
+    $selectSize.addEventListener('change', function(e){ changeSetting(); createMaze(); });
+    $selectDense.addEventListener('change', function(e){ changeSetting(); createMaze(); });
 
     // initialize
-    var map = Map(Config.COLUMN, Config.ROW);
-    var square = Square(document.getElementById('maze-container'));
+    var map = Map();
+    var square = Square();
     var executor = Executor();
     var editor = CommandEditor(executor);
     var finder = Finder();
+
+    changeSetting();
+    createMaze();
 
     return manager;
 
@@ -72,13 +66,26 @@ var Manager = (function() {
     // build a wall on {pos} position
     function buildWall(pos) {
         pos = pos || square.getFront();
+        if (!validPos(pos) || isWall(pos)) {
+            log(CONFIG.LOG.ERROR_WALL);
+            return;
+        }
         map.buildWall(pos);
     }
 
     // paint the wall
     function colorWall(color, pos) {
         pos = pos || square.getFront();
+        if (!validPos(pos) || !isWall(pos)) {
+            log(CONFIG.LOG.ERROR_COLOR);
+            return;
+        }
         map.colorWall(pos, color);
+    }
+
+    function createMaze(){
+        map.setMaze();
+        square.reset();
     }
 
     // ---------------- private methods -------------------
@@ -93,18 +100,27 @@ var Manager = (function() {
     // find an empty place to build a wall
     // if no such place, return
     function randomWall() {
-        if (map.wallCount >= Config.COLUMN * Config.ROW - 1)
+        if (map.wallCount >= CONFIG.VALUE.COLUMN * CONFIG.VALUE.ROW - 1)
             return;
-        var pos = randomPos(Config.COLUMN, Config.ROW);
-        while (square.atPos(pos) || map.isWall(pos)) {
-            pos = randomPos(Config.COLUMN, Config.ROW);
+        var pos = randomPos(CONFIG.VALUE.COLUMN, CONFIG.VALUE.ROW);
+
+        var factor = Math.floor(Math.random()*2);
+        for(var i=0; i<15; i++) {
+            var pos1 = {x: factor ? pos.x : i + pos.x, y: !factor ? pos.y : i + pos.y};
+            if (!square.atPos(pos1) && !map.isWall(pos1) && map.validPos(pos1))
+                buildWall(pos1);
         }
-        buildWall(pos);
+        // buildWall(pos);
     }
 
     // reset everything www
     function reset() {
         map.reset();
         square.reset();
+    }
+
+    function changeSetting() {
+        CONFIG.set($selectSize.value, $selectDense.value);
+        reset();
     }
 })();

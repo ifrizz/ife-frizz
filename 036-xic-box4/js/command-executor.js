@@ -25,27 +25,27 @@ var Executor = function () {
     var dirmap = {"lef" : 4, "top": 1, "rig":2, "bot":3};
 
     var validator = [{
-            pattern: /^go\s+(\d+)\s*/,
+            pattern: /^go\s+(\d+)\s*$/,
             action: [function(step) { Manager.moveSquare(+step, 0, 0); }]
         },{
-            pattern: /^tun\s+(lef|rig|bac)\s*/,
-            action: [function(tun) { Manager.moveSquare(0, 0, tunmap[dir]); }]
+            pattern: /^tun\s+(lef|rig|bac)\s*$/,
+            action: [function(tun) { Manager.moveSquare(0, 0, tunmap[tun]); }]
         },{
-            pattern: /^tra\s+(lef|top|rig|bot)\s+(\d+)\s*/,
+            pattern: /^tra\s+(lef|top|rig|bot)\s+(\d+)\s*$/,
             action: [function(dir, step) { Manager.moveSquare(+step, dirmap[dir], 0); }]
         },{
-            pattern: /^mov\s+(lef|top|rig|bot)\s+(\d+)\s*/,
+            pattern: /^mov\s+(lef|top|rig|bot)\s+(\d+)\s*$/,
             action: [
                 function(dir, step) { Manager.moveSquare(0, 0, dirmap[dir]); },
                 function(dir, step) { Manager.moveSquare(+step, dirmap[dir], 0); }]
         },{
-            pattern: /^biud\s*/,
+            pattern: /^biud\s*$/,
             action: [function() { Manager.buildWall(); }]
         },{
-            pattern: /^bru\s+(#[0-9a-e]{6}|#[0-9a-e]{3})\s*/,
+            pattern: /^bru\s+(#[0-9a-f]{3}|#[0-9a-f]{6})?\s*$/,
             action: [function(color) { Manager.colorWall(color); }]
         },{
-            pattern: /^mov to\s+(\d+),\s*(\d+)\s+(a\*|bfs|best|dfs)/,
+            pattern: /^mov to\s+(\d+),\s*(\d+)\s+(a\*|bfs|best|dfs)\s*$/,
             action: [function(x, y, type) { parsePath( Manager.getPath({x:+x, y:+y}, type)); }]
         },
     ];
@@ -93,20 +93,22 @@ var Executor = function () {
             clearTimeout(timer);
             timer = null;
             execute();
-        }, Config.INTERVAL);
+        }, CONFIG.VALUE.INTERVAL);
     }
 
     // bind moves in the same direction
     function parsePath(path) {
         if (!path) {
-            Manager.log(Config.LOG.ERROR_PATH);
+            Manager.log(CONFIG.VALUE.LOG.ERROR_PATH);
             return;
         }
+        Manager.log(path.name + "君进行了 " + path.calc + " 次运算，路径长度 " + path.path.length);
+        path = path.path;
         var last = path.shift(),
             cur = last,
             sum = [0, 0];
         while(cur || path.length > 0) {
-            if (cur[0] != last[0] || sum[1] >= 3) {
+            if (cur[0] != last[0] || sum[1] >= CONFIG.VALUE.MAX_STEP) {
                 parsePathNode(sum);
                 sum = [0, 0];
             }
@@ -119,10 +121,11 @@ var Executor = function () {
     }
 
     function parsePathNode(node) {
+        if (CONFIG.VALUE.COLUMN !== 100)
         actionQueue.push({
             action: function(dir) { Manager.moveSquare(0, 0, dir); },
             args: [node[0]]
-        }),
+        });
         actionQueue.push({
             action: function(dir, step) { Manager.moveSquare(step, dir, 0); },
             args: node

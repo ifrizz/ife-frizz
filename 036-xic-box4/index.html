@@ -8,12 +8,25 @@
 </head>
 <body>
 <div class="content clearfix">
-    <div id="maze-container">
-    </div>
+    <div id="maze-container"></div>
     <div class="commander-container">
         <div class="commander-menu">
-            <button id="btn-build-wall">造墙技术哪家萌，牧童遥指西土城</button>
             <button id="btn-reset">回炉重造</button>
+            <button id="btn-build-wall">造墙技术哪家萌，牧童遥指西土城</button>
+        </div>
+        <div class="setting">
+            <span>地图大小</span>
+            <select name="select-size" id="select-size">
+                <option value="10">10</option>
+                <option value="20" selected="selected">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <span>迷宫密度</span>
+            <select name="select-density" id="select-density">
+                <option value="sparse">Sparse</option>
+                <option value="dense" selected="selected">Dense</option>
+            </select>
         </div>
         <div class="commander">
             <div class="commander-lines-wrapper">
@@ -30,21 +43,24 @@
             <textarea title="command" class="commander-editor" spellcheck="false"></textarea>
         </div>
     </div>
+    <div class="instruction">
+        <p>GO X: 前进X格</p>
+        <p>TUN [LEF | RIG | BAC]: 向左/右/后转</p>
+        <p>TRA [LEF | TOP | RIG | BOT] X: 向指定方向移动X格</p>
+        <p>MOV [LEF | TOP | RIG | BOT] X: 向指定方向转身并移动X格</p>
+        <p>BIUD: 在面前修墙</p>
+        <p>BRU #color: 给面前的墙上色</p>
+        <p>MOV TO x y [DFS | BFS | BEST | A*]: 指定寻路算法，移动至指定坐标</p>
+    </div>
 </div>
-    <p>GO X: 前进X格</p>
-    <p>TUN LEF: 向左转</p>
-    <p>TUN RIG: 向右转</p>
-    <p>TUN BAC: 向后转</p>
-    <p>TRA [LEF | TOP | RIG | BOT] X: 向指定方向移动X格</p>
-    <p>MOV [LEF | TOP | RIG | BOT] X: 向指定方向转身并移动X格</p>
-    <p>BIUD: 在面前修墙</p>
-    <p>BRU #color: 给面前的墙上色</p>
-    <p>MOV TO x y [DFS | BFS | BEST | A*]: 指定寻路算法，移动至指定坐标</p>
+<div id="maze-position">鼠标悬停的时候这里会显示格子坐标（●>∀<●）</div>
 <script src="js/map.js"></script>
 <script src="js/square.js"></script>
 <script src="js/finder.js"></script>
+<script src="js/binaryheap.js"></script>
 <script src="js/command-editor.js"></script>
 <script src="js/command-executor.js"></script>
+<script src="js/application.js"></script>
 <script src="js/manager.js"></script>
 </body>
 </html>

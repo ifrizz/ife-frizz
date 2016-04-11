@@ -34,12 +34,18 @@ var Finder = function(){
         add: function(pos) {
             if (!pos) return this.clone();
             return new V2(this.x + pos.x, this.y + pos.y);
+        },
+        // manhattan distance
+        dist: function(pos) {
+            return Math.abs(this.x - pos.x) + Math.abs(this.y - pos.y);
         }
     };
 
-    var PathNode = function(_prev, _pos) {
-        this.prev = _prev;
-        this.pos = _pos
+    var PathNode = function(prev, pos, value, cost) {
+        this.prev = prev;
+        this.pos = pos
+        this.value = value || 0; // E(S) + G(S) -> manhattan dist + (penalty in A*)
+        this.cost = cost || 0;
     }
 
     PathNode.prototype = {
@@ -57,7 +63,9 @@ var Finder = function(){
 
     var algorithms = {
         dfs: dfs,
-        bfs: bfs
+        bfs: bfs,
+        best: bestfs,
+        "a*": astar
     };
 
     // ---------------------- API -----------------------
@@ -70,32 +78,36 @@ var Finder = function(){
 
     // ------------ 方块君跑DFS的路线真是让人心疼啊汪wwww --------------------
 
-    function dfs(cur, dst, map) {
-        map.info[cur.y][cur.x] = false; // mark {cur} as visited
-        if(cur.equal(dst)) return [];   // if find target
-        var adj = getAdj(cur);          // o.w. bfs
-        for (var a of adj) {
-            if (validatePos(a, map)) {
-                // path.push(cur.to(a));
-                var result = dfs(a, dst, map);
-                if (result !== undefined) {
-                    result.unshift(cur.to(a));
-                    return result;
+    // 就是任性不写递归你咬我呀ヽ(●´ω｀●)ﾉ
+    function dfs(src, dst, map) {
+        var stack = [new PathNode(undefined, src)];
+        var calc = 0;
+        while (stack.length > 0) {
+            calc += 1;
+            var node = stack.pop();
+            if (node.pos.equal(dst))
+                return pathInfo("DFS", node.getPath(), calc);
+            var adj = getAdj(node.pos);
+            for (a of adj) {
+                if (validatePos(a, map)) {
+                    map.info[a.y][a.x] = false;
+                    stack.push(new PathNode(node, a));
                 }
-                // path.pop();
             }
         }
-        return undefined;
+        return null;
     }
 
     // ---------------- 我们省省力气来跑蠢乎乎的BFS --------------------
 
     function bfs(src, dst, map) {
         var queue = [new PathNode(undefined, src)];
+        var calc = 0;
         while (queue.length > 0) {
+            calc += 1;
             var node = queue.shift();           // dequeue
             if (node.pos.equal(dst))            // if found
-                return node.getPath();          // return path
+                return pathInfo("BFS", node.getPath(), calc);
             var adj = getAdj(node.pos);         // o.w. get adj positions
             for (a of adj) {
                 if (validatePos(a, map)) {      // if position is valid
@@ -107,7 +119,61 @@ var Finder = function(){
         return null;
     }
 
-    // ---------------- 贪心得像室友君一样的BestFS君 ------------------
+    // ---------------- 笨头笨脑的BestFS君 ------------------
+
+    function bestfs(src, dst, map) {
+        var pq = new PriorityQueue(compare);
+        var calc = 0;
+        pq.enqueue(new PathNode(undefined, src, src.dist(dst))); // start: push start node into PQ
+        while (pq.size() > 0) {
+            calc += 1;
+            var node = pq.dequeue();       // get the best node
+            if (node.pos.equal(dst))       // if found, return path
+                return pathInfo("Best-FS", node.getPath(), calc);
+            var adj = getAdj(node.pos);    // o.w. try all adj
+            for (a of adj) {
+                if (validatePos(a, map)) {   // check if pos is valid
+                    map.info[a.y][a.x] = false;    // mark the pos as visited
+                    pq.enqueue(new PathNode(node, a, a.dist(dst)));  // push into PQ
+                }
+            }
+        }
+        return null;
+    }
+
+    // ---------------- 喵同学喜欢的冷静的A*君 ------------------
+
+    function astar(src, dst, map) {
+        var pq = new PriorityQueue(compare);
+        var calc = 0;
+        pq.enqueue(new PathNode(undefined, src, src.dist(dst), 1)); // start: push start node into PQ
+        while (pq.size() > 0) {
+            calc += 1;
+            var node = pq.dequeue();       // get the best node
+            if (node.pos.equal(dst))       // if found, return path
+                return pathInfo("A*", node.getPath(), calc);
+            var adj = getAdj(node.pos);    // o.w. try all adj
+            for (a of adj) {
+                if (validatePos(a, map)) {   // check if pos is valid
+                    map.info[a.y][a.x] = false;    // mark the pos as visited
+                    pq.enqueue(new PathNode(node, a, a.dist(dst) + node.cost, node.cost + 1));  // push into PQ
+                }
+            }
+        }
+        return null;
+    }
+
+    function pathInfo(name, path, calc) {
+        return {
+            path: path,
+            calc: calc,
+            name: name
+        }
+    }
+
+    function compare(node1, node2) {
+        return node1.value - node2.value;
+    }
 
     function validatePos(pos, map) {
         return pos.x >= 0
