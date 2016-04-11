@@ -1,5 +1,3 @@
-
-// main manager
 var Manager = (function() {
 
     // ---------------------- API -----------------------
@@ -8,9 +6,8 @@ var Manager = (function() {
         moveSquare: moveSquare,
         getPath: getPath,
         buildWall: buildWall,
-        colorWall: colorWall,
-        reset: reset
-    }
+        colorWall: colorWall
+    };
 
     // DOM & listeners
     var $btnWall = document.getElementById('btn-build-wall');
@@ -35,52 +32,23 @@ var Manager = (function() {
 
     return manager;
 
-    // ---------------- public methods -------------------
-
-    // log
+    // public log info
     function log(str) {
         var event = new CustomEvent('log', {'detail':str});
         window.dispatchEvent(event);
     }
 
-    // move the square to a proper position
-    // take walls and borders into account
-    function moveSquare(step, dir, angle) {
-        if (step && angle) {
-            square.rotateTo(angle);
-            square.move(step, dir);
-        }
-        else if (step)
-            square.move(step, dir);
-        else if (angle)
-            square.rotateTo(angle);
+
+    // ----------------- private methods for initialization -------------------
+
+    function changeSetting() {
+        CONFIG.set($selectSize.value, $selectDense.value);
+        reset();
     }
 
-    // get a path from current position to dst position
-    function getPath(dst, type) {
-        var src = square.position();
-        var mapInfo = map.getMapInfo();
-        return finder.getPath(src, dst, mapInfo, type);
-    }
-
-    // build a wall on {pos} position
-    function buildWall(pos) {
-        pos = pos || square.getFront();
-        if (!validPos(pos) || isWall(pos)) {
-            log(CONFIG.LOG.ERROR_WALL);
-            return;
-        }
-        map.buildWall(pos);
-    }
-
-    // paint the wall
-    function colorWall(color, pos) {
-        pos = pos || square.getFront();
-        if (!validPos(pos) || !isWall(pos)) {
-            log(CONFIG.LOG.ERROR_COLOR);
-            return;
-        }
-        map.colorWall(pos, color);
+    function reset() {
+        map.reset();
+        square.reset();
     }
 
     function createMaze(){
@@ -88,7 +56,63 @@ var Manager = (function() {
         square.reset();
     }
 
-    // ---------------- private methods -------------------
+
+    // ----------- public methods for actions called by executor ---------------
+
+    // move the square to a proper position, taking walls and borders into account
+    function moveSquare(step, dir, angle) {
+        if (angle) {
+            square.rotateTo(angle);
+        }
+        else if (step) {
+            // get a valid pos
+            if (dir == 0) dir = square.getRotation();
+            var vecmap = [0, {x:0, y:-1}, {x:1, y:0}, {x:0, y:1}, {x:-1, y:0}];
+            var finalStep = 0;
+            var vec = vecmap[dir];
+            var curPos = square.getPosition();
+            while (step--) {
+                var curPos = {x: curPos.x + vec.x, y: curPos.y + vec.y};
+                if (!map.validPos(curPos) || map.isWall(curPos))
+                    break;
+                finalStep++;
+            }
+            if (step > 0)
+                log(CONFIG.LOG.ERROR_SQUARE);
+            square.move(finalStep, dir);
+        }
+    }
+
+    // get a path from current position to dst position
+    function getPath(dst, type) {
+        var src = square.getPosition();
+        var mapInfo = map.getMapInfo();
+        return finder.getPath(src, dst, mapInfo, type);
+    }
+
+    // build a wall on {pos} position
+    function buildWall(pos) {
+        pos = pos || square.getFront();
+        if (!map.buildWall(pos))
+            log(CONFIG.LOG.ERROR_WALL);
+    }
+
+    // paint the wall
+    function colorWall(color, pos) {
+        pos = pos || square.getFront();
+        if (!map.colorWall(pos, color))
+            log(CONFIG.LOG.ERROR_COLOR);
+    }
+
+
+
+
+
+
+    // *********** these method are for creating a random wall **************
+    // ****** no longer used, since the random maze is finished lol *********
+
+    /*
 
     // generate a random position within the map
     function randomPos(w, h) {
@@ -97,13 +121,10 @@ var Manager = (function() {
         return {x:x, y:y};
     }
 
-    // find an empty place to build a wall
-    // if no such place, return
     function randomWall() {
         if (map.wallCount >= CONFIG.VALUE.COLUMN * CONFIG.VALUE.ROW - 1)
             return;
         var pos = randomPos(CONFIG.VALUE.COLUMN, CONFIG.VALUE.ROW);
-
         var factor = Math.floor(Math.random()*2);
         for(var i=0; i<15; i++) {
             var pos1 = {x: factor ? pos.x : i + pos.x, y: !factor ? pos.y : i + pos.y};
@@ -113,14 +134,5 @@ var Manager = (function() {
         // buildWall(pos);
     }
 
-    // reset everything www
-    function reset() {
-        map.reset();
-        square.reset();
-    }
-
-    function changeSetting() {
-        CONFIG.set($selectSize.value, $selectDense.value);
-        reset();
-    }
+    */
 })();

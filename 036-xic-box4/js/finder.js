@@ -6,6 +6,8 @@
     口以直接调成员函数！
     ……话说回来这个不就是普通的访问object成员的方式吗_(:з」∠)_（你蠢
 
+    不查资料不翻课件手写 binaryheap best-fs a* 一次跑通成就达成ヽ(●´ω｀●)ﾉ
+
 */
 var Finder = function(){
 

@@ -1,3 +1,10 @@
+/*
+    *** Notes:
+    重要的话要在前面标三颗星星~
+    When using module pattern, remember to use get() & set() functions to for primitive variables.
+    Otherwise, it will return a copy instead of a reference.
+*/
+
 // global variables
 var CONFIG = (function() {
     var MAIN_WIDTH = 500,
@@ -19,7 +26,7 @@ var CONFIG = (function() {
         ERROR_PATH:  "走呀走呀走不到（●>∀<●）",
         ERROR_WALL:  "此处禁止违章建筑(｡ŏ_ŏ)",
         ERROR_COLOR: "此处禁止涂鸦(#`Д´)ﾉ",
-        ERROR_SQUARE: "撞墙惹 (╯°Д°)╯︵ ┻━┻"
+        ERROR_SQUARE: "撞墙惹 ( ˘•ω•˘ )"
     };
 
     var setting = {

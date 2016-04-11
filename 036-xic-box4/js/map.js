@@ -9,34 +9,34 @@
 PO主快去死吧（……）
 */
 var Map = function(){
-    var container = document.getElementById("maze-container");
-    var posinfo = document.getElementById("maze-position");
+    var container = document.getElementById("maze-container");  // maze container
+    var posinfo = document.getElementById("maze-position");     // position info
 
-    container.addEventListener('mouseover', function(e){ showInfo(e); });
-    container.addEventListener('mouseout', function(e){ hideInfo(e); });
-    var box = [];
-    var divs = [];
-    var wallCount = 0;
+    var box = [];   // stores all divs of blocks
+
+    container.addEventListener('mouseover', function(e) { showInfo(e); });
+    container.addEventListener('mouseout',  function(e) { hideInfo(e); });
+
     init();
 
     // ---------------------- API -----------------------
 
     return {
-        // int: number of walls in the map
-        wallCount: wallCount,
 
-        /* bool isWall (pos): return if a wall is at the position {x, y} */
+        buildWall: buildWall,    // buildWall(pos)
+
+        colorWall: colorWall,    // colorWall(pos, color)
+
+        getMapInfo: getMapInfo,  // getMapInfo(): return {info, width, height} @info: marks the position that are valid for path-finding
+
+        reset: reset,            // reset()
+
+        setMaze: setMaze,         // setMaze(): generate a new random maze
+
+        validPos: validPos,      // 下次优化的时候第一个就要把这俩丑陋的API去掉（咬牙
+
         isWall: isWall,
-        /* void buildWall (pos): build a wall at position {x, y} */
-        buildWall: buildWall,
-        /* void colorWall (pos, color): color the {pos} wall in {color} */
-        colorWall: colorWall,
-        /* getMapInfo(): return {info, width, height} */
-        getMapInfo: getMapInfo,
-        /* void reset () : reset color of all blocks */
-        reset: reset,
-        validPos: validPos,
-        setMaze: setMaze
+
     };
 
     // ---------------- public methods -------------------
@@ -46,19 +46,18 @@ var Map = function(){
     }
 
     function buildWall(pos) {
-        if (!validPos(pos) || isWall(pos)) {
-            return;
-        }
-        wallCount += 1;
+        if (!validPos(pos) || isWall(pos))
+            return false;
         setType(pos, 'wall');
         setColor(pos, CONFIG.VALUE.WALL_COLOR);
+        return true;
     }
 
     function colorWall(pos, color) {
-        if (!validPos(pos) || !isWall(pos)) {
-            return;
-        }
+        if (!validPos(pos) || !isWall(pos))
+            return false;
         setColor(pos, color);
+        return true;
     }
 
     function getMapInfo() {
@@ -82,6 +81,7 @@ var Map = function(){
         // set container
         container.style.width = '500px';
         container.style.height = '500px';
+
         // add blocks
         for (var i = 0; i < 100; i++) {
             for (var j = 0; j < 100; j++) {

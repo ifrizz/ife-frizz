@@ -99,7 +99,7 @@ var Executor = function () {
     // bind moves in the same direction
     function parsePath(path) {
         if (!path) {
-            Manager.log(CONFIG.VALUE.LOG.ERROR_PATH);
+            Manager.log(CONFIG.LOG.ERROR_PATH);
             return;
         }
         Manager.log(path.name + "君进行了 " + path.calc + " 次运算，路径长度 " + path.path.length);
