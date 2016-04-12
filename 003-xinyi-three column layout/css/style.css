@@ -33,6 +33,7 @@ button { cursor: pointer }
 }
 
 .middle {
+    /*width:100%;*/
     margin-left: 220px;
     margin-right: 140px;
 }
