@@ -28,3 +28,14 @@
 * `filter()` // 跟Spark一样一样的
 
 * 直接innerHTML就好了
+
+
+# Task 15
+
+* `Element.childNodes` 返回值好诡异，为啥有 text ？？
+
+* `querySelectorAll()` 返回的是 `NodeList` Object （上面那货返回的也是这个），并不是 `Array`.
+	* 所以一切对返回值用Array.method的企图都是徒劳的
+	* 可以用 `call` 强行对其执行Array的方法
+	* 也可以将其转换成Array // JavaScript的水还真是深啊哼
+	* （[详情](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)） // 瞪我干嘛我就有三种变的方法（orz...
