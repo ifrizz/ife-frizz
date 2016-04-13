@@ -9,3 +9,22 @@
 	* `v !== v` 只对 `NaN` 为 true
 
 * `isNaN()` 可用来判断是否为 Number
+
+
+# Task 14
+
+* `arr.sort([compareFunction])`
+	* sort *in place* and also return the sorted array
+	* 前方有坑！如果没有`compareFunction`，会全部转换成`String`来比较
+	* compareFunction(a, b)返回值 `<0`: 把a排在前面（默认ascending order）；`=0`不变
+
+````javascript
+	var scores = [1, 10, 2, 21];
+	scores.sort(); // [1, 10, 2, 21] - Unicode code point order
+```
+
+* 用到了 Arrow Function，类似于 lambda
+
+* `filter()` // 跟Spark一样一样的
+
+* 直接innerHTML就好了
