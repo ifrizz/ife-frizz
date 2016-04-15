@@ -58,11 +58,6 @@ $element.addEventListener('eventName', function(e){
 });
 ```
 
-## Detect keydown event
-拦截事件
-
-`e.preventDefault()`
-
 ## TextArea光标位置
 
 `$editor.selectStart`
