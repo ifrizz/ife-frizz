@@ -4,8 +4,8 @@ var aqiData = {};
 // elements
 var inputCity  = document.getElementById('aqi-city-input'),
     inputAqi   = document.getElementById('aqi-value-input'),
-    button     = document.getElementById('add-btn');
-    table      = document.getElementById("aqi-table");
+    button     = document.getElementById('add-btn'),
+    table      = document.getElementById("aqi-table"),
     checkmarks = document.getElementsByClassName ('checkmark');
 
 // input validators

@@ -1,0 +1,110 @@
+
+/********************** tag 编辑栏样式 ******************************/
+.tag-input-tip {
+  display: none;
+  margin: 5px 0 0px 45px;
+  color: #AEAEAE;
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+.tag-box{
+    width: 300px;
+    margin: 0 0 0 0;
+}
+
+.tag-container{
+    width: 300px;
+    padding: 0;
+}
+.tag-input label {
+    display: inline-block;
+}
+
+.tag-input input {
+    display: inline-block;
+    width: 200px;
+    height: 25px;
+    padding: 8px;
+    border: 1px solid #AEAEAE;
+    margin: 0 5px 0 20px;
+    border-radius: 3px;
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.tag-container div{
+    display: inline-block;
+    margin: 5px 5px 5px 0px;
+    padding: 3px 5px 3px 5px;
+    border: none;
+    border-radius: 3px;
+    background: #66B3FF;
+    color: #3C3C3C;
+    cursor:pointer;
+    word-break:break-all;
+}
+
+.tag-container div:hover{
+    background:#2F79BA;
+    color: #fff;
+}
+
+.tag-show{
+  display: block;
+}
+
+/********************** tag 编辑框样式 ******************************/
+
+.tag-puttor{
+    position:relative;
+    width: 260px;
+    height: 110px;
+    margin: 0;
+}
+
+.tag-puttor textarea {
+    resize: none;
+    width: 260px;
+    height: 80px;
+    padding: 8px;
+    border: 1px solid #AEAEAE;
+    margin: 0 5px 0 0;
+    border-radius: 3px;
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.tag-puttor-tip {
+  display: none;
+  margin: 5px 0 0px 0px;
+  color: #AEAEAE;
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.tag-puttor-btn {
+  position: absolute;
+  top: 80px;
+  right: 0px;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  border: none;
+  margin: 5px 0px 5px 5px;
+  border-radius: 3px;
+  background: #C3C3C3;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+.tag-puttor-btn:active{
+  background: #757575;
+
+}
+
+.tag-show{
+  display: block;
+}
