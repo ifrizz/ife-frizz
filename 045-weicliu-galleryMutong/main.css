@@ -4,7 +4,7 @@ body {
   background: #EEE;
 }
 
-.wrap {
+#wrap {
   margin: 10px;
 }
 
@@ -13,11 +13,7 @@ img{
 	height:auto;
 }
 
-.row{
-  height: 50px;
-}
-
-.img-group{
+.img-row{
 	display:flex;
   width: 80%;
   margin: auto;
@@ -25,24 +21,4 @@ img{
 
 .padding{
   padding: 3px;
-}
-
-#img-container1{
-	flex:0.4285;
-}
-
-#img-container2{
-	flex:1.25;
-}
-
-#img-container3{
-	flex:4.5;
-}
-
-#img-container5{
-	flex:0.75;
-}
-
-#img-container6{
-	flex:2.5;
 }

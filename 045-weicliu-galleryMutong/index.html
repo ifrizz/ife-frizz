@@ -6,41 +6,20 @@
 
   <title>Mutong Photo Gallery</title>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="mutong.js"></script>
+
+  <script type="text/javascript">
+    function load(){
+      var mutong = new Mutong();
+      mutong.init();
+    }
+  </script>
 
 </head>
 
-<body>
-  <div class="wrap">
-    <div class="row">
+<body onload="load();">
+  <div id="wrap">
 
-      <div class="img-group">
-        <div id="img-container1" class="padding">
-          <img src="http://placehold.it/150x350">
-        </div>
-
-        <div id="img-container2" class="padding">
-          <img src="http://placehold.it/500x400" />
-        </div>
-
-        <div id="img-container3" class="padding">
-          <img src="http://placehold.it/900x200" />
-        </div>
-      </div>
-
-      <div class="img-group">
-        <div id="img-container1" class="padding">
-          <img src="http://placehold.it/150x350">
-        </div>
-
-        <div id="img-container5" class="padding">
-          <img src="http://placehold.it/300x400" />
-        </div>
-
-        <div id="img-container6" class="padding">
-          <img src="http://placehold.it/500x200" />
-        </div>
-
-    </div>
   </div>
 </body>
 </html>
