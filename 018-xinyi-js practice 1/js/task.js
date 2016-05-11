@@ -9,7 +9,7 @@ var left_in = document.getElementById('left-in'),
 function handler(id) {
   value = number_input.value;
   if (id == "left_in") {
-    str = "<div class=\"number\">" + value + "</div>";
+    str = "<div class='number'>" + value + "</div>";
     que.innerHTML = str + que.innerHTML;
   }
   if (id == "right_in") {
