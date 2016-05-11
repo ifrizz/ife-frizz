@@ -19,9 +19,9 @@ img{
 
 ```css
 .img-row{
-	display:flex;
-	/* centering */
-	width: 80%;
+  display:flex;
+  /* centering */
+  width: 80%;
   margin: auto;
 }
 ```
