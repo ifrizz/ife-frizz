@@ -1,7 +1,7 @@
 
 var Waterfall = function() {
     this.settings = {
-        imgNum: 7,
+        imgNum: 10,
         baseUrl: "http://placehold.it/",
         numInCol: 4,
         paddingVal: "16px"
@@ -62,7 +62,7 @@ Waterfall.prototype.Render = function() {
         div_imgCol.appendChild(div_imgContainer);               
     }    
 
-    
+
     var items = document.getElementsByClassName("item");
     for (var i = 0; i < items.length; i++) {
         items[i].style.padding = this.settings.paddingVal;
