@@ -4,10 +4,9 @@
 
 ### CSS
 
-> [standalone demo](http://codepen.io/weicliu/pen/EKMeEj)
-> [flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+> [standalone demo](http://codepen.io/weicliu/pen/EKMeEj), [flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-1. image resize with its container
+1\. image resize with its container
 
 ```css
 img{
@@ -16,7 +15,7 @@ img{
 }
 ```
 
-2. set its container to `flex`
+2\. set its container to `flex`
 
 ```css
 .img-row{
@@ -27,5 +26,5 @@ img{
 }
 ```
 
-3. set `flex-grow` to the weight (width/height ratio). (可以理解为每单位高度的宽度)
+3\.  set `flex-grow` to the weight (width/height ratio). (可以理解为每单位高度的宽度)
 
