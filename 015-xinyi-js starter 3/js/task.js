@@ -1,4 +1,4 @@
-var source_data = document.querySelectorAll('#source li'),
+var source_data = document.querySelectorAll('#source li'), 
     render_area = document.getElementById('result');
 
 
