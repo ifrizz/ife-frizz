@@ -40,15 +40,16 @@ Waterfall.prototype.Selector = function() {
 
 Waterfall.prototype.Render = function() {
     accHeight = [];
-    for (var i = 0; i < this.imgSrc.length; i++){
-        if (i < this.settings.numInCol){
-            var div_imgCol = document.createElement("div");
-            div_imgCol.className = "img-col";
-            div_imgCol.id = "col-" + i.toString();
-            document.getElementById("wrap").appendChild(div_imgCol);
-            accHeight.push(0);
-        }
+    for (var i = 0; i < this.settings.numInCol; i++) {
+        var div_imgCol = document.createElement("div");
+        div_imgCol.className = "img-col";
+        div_imgCol.style.width = (100 / this.settings.numInCol).toString() + "%";
+        div_imgCol.id = "col-" + i.toString();
+        document.getElementById("wrap").appendChild(div_imgCol);
+        accHeight.push(0);
+    }
 
+    for (var i = 0; i < this.imgSrc.length; i++){
         var idx = this.Selector(), 
             div_imgContainer = document.createElement("div"),
             img = document.createElement("img");
@@ -57,14 +58,9 @@ Waterfall.prototype.Render = function() {
         
         div_imgCol = document.getElementById("col-" + idx.toString());
         div_imgContainer.className = "item";
+        div_imgContainer.style.padding = this.settings.paddingVal;
         img.setAttribute("src", this.imgSrc[i].url);
         div_imgContainer.appendChild(img);
         div_imgCol.appendChild(div_imgContainer);               
     }    
-
-
-    var items = document.getElementsByClassName("item");
-    for (var i = 0; i < items.length; i++) {
-        items[i].style.padding = this.settings.paddingVal;
-    }
 }
