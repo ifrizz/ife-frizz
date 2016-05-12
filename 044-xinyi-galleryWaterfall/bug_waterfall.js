@@ -5,7 +5,6 @@ var Waterfall = function() {
         baseUrl: "http://placehold.it/",
         numInCol: 6,
         paddingVal: "16px",
-        cols : []
     }
 }
 
@@ -34,25 +33,15 @@ Waterfall.prototype.Create = function() {
 Waterfall.prototype.Selector = function() {
     var idx = 0, pos = Number.MAX_VALUE;
     for (var i = 0; i < this.settings.numInCol; i++) {
+        // i = 0
+        var ele = document.getElementById('col-' + i.toString());
+        var cur_pos = ele.getBoundingClientRect().bottom;
         console.log('~~~~');
-        console.log(this.settings.cols[i].clientHeight);
-        var ele = this.settings.cols[i].lastChild;
-        // var ele = document.getElementById('col-' + i.toString()).lastChild;
-        if (ele) {
-            // console.log(ele);
-            // console.log(i)
-            console.log(ele.getBoundingClientRect().bottom);
-            console.log(ele.clientHeight);
-        }
-        if(ele) {
-            var cur_pos = ele.getBoundingClientRect().bottom;
-            if (cur_pos < pos) { 
-                idx = i; 
-                pos = cur_pos;
-            }
-        }
-        else {
-            return i;
+        console.log(cur_pos);
+
+        if (cur_pos < pos) { 
+            idx = i; 
+            pos = cur_pos;
         }
     }
     return idx;
@@ -65,8 +54,7 @@ Waterfall.prototype.Render = function() {
         div_imgCol.className = "img-col";
         div_imgCol.style.width = (100 / this.settings.numInCol).toString() + "%";
         div_imgCol.id = "col-" + i.toString();
-        this.settings.cols.push(div_imgCol);
-        document.getElementById("wrap").appendChild(this.settings.cols[i]);
+        document.getElementById("wrap").appendChild(div_imgCol);
     }
 
     for (var i = 0; i < this.imgSrc.length; i++){
@@ -76,12 +64,12 @@ Waterfall.prototype.Render = function() {
 
         console.log(idx);
         
-        // div_imgCol = document.getElementById("col-" + idx.toString());
+        div_imgCol = document.getElementById("col-" + idx.toString());
         div_imgContainer.className = "item";
         div_imgContainer.style.padding = this.settings.paddingVal;
         img.setAttribute("src", this.imgSrc[i].url);
         div_imgContainer.appendChild(img);
-        this.settings.cols[idx].appendChild(div_imgContainer);               
+        div_imgCol.appendChild(div_imgContainer);               
     }    
 
 }
