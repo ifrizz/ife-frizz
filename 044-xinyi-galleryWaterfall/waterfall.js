@@ -1,10 +1,10 @@
 
 var Waterfall = function() {
     this.settings = {
-        imgNum: 10,
+        imgNum: 15,
         baseUrl: "http://placehold.it/",
-        numInCol: 4,
-        paddingVal: "16px"
+        numInCol: 6,
+        paddingVal: 16,
     }
 }
 
@@ -24,47 +24,51 @@ Waterfall.prototype.Create = function() {
             width: width,
             height: height,
             url: this.settings.baseUrl + width + "x" + height + "/" + color + "/fff",
-            ratio: width / height
+            ratio: height / width
         });
     }
 }
 
 // select the shortest column when insert a new picture
 Waterfall.prototype.Selector = function() {
-    var idx = 0;
-    for (var i = 0; i < accHeight.length; i++) {
-        if (accHeight[i] < accHeight[idx]) { idx = i; }
+    var idx = 0, pos = Number.MAX_VALUE;
+    for (var i = 0; i < this.settings.numInCol; i++) {
+        // i = 0
+        var ele = document.getElementById('col-' + i.toString());
+        var cur_pos = ele.getBoundingClientRect().bottom;
+
+        if (cur_pos < pos) { 
+            idx = i; 
+            pos = cur_pos;
+        }
     }
     return idx;
 }
 
 Waterfall.prototype.Render = function() {
-    accHeight = [];
-    for (var i = 0; i < this.imgSrc.length; i++){
-        if (i < this.settings.numInCol){
-            var div_imgCol = document.createElement("div");
-            div_imgCol.className = "img-col";
-            div_imgCol.id = "col-" + i.toString();
-            document.getElementById("wrap").appendChild(div_imgCol);
-            accHeight.push(0);
-        }
+    // var cols = [];
+    for (var i = 0; i < this.settings.numInCol; i++) {
+        var div_imgCol = document.createElement("div");
+        div_imgCol.className = "img-col";
+        div_imgCol.style.width = (100 / this.settings.numInCol).toString() + "%";
+        div_imgCol.id = "col-" + i.toString();
+        document.getElementById("wrap").appendChild(div_imgCol);
+    }
 
+    for (var i = 0; i < this.imgSrc.length; i++){
         var idx = this.Selector(), 
             div_imgContainer = document.createElement("div"),
-            img = document.createElement("img");
-        
-        accHeight[idx] += 1 / this.imgSrc[i].ratio;
+            div_img = document.createElement("img"),
+            img = this.imgSrc[i];
+
         
         div_imgCol = document.getElementById("col-" + idx.toString());
         div_imgContainer.className = "item";
-        img.setAttribute("src", this.imgSrc[i].url);
-        div_imgContainer.appendChild(img);
+        div_imgContainer.style.padding = this.settings.paddingVal.toString() + "px";
+        div_imgContainer.style.height = (img.ratio * (div_imgCol.offsetWidth - 2 * this.settings.paddingVal)).toString() + "px";
+        div_img.setAttribute("src", img.url);
+        div_imgContainer.appendChild(div_img);
         div_imgCol.appendChild(div_imgContainer);               
     }    
 
-
-    var items = document.getElementsByClassName("item");
-    for (var i = 0; i < items.length; i++) {
-        items[i].style.padding = this.settings.paddingVal;
-    }
 }
