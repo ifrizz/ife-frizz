@@ -1,0 +1,36 @@
+﻿#dialog{
+  padding : 10 0 0 0;
+  width: 100%;
+  height: 300px;
+  background-color: black;
+}
+
+
+@keyframes shining {
+    0%   {opacity: 0;}
+    50%  {opacity: 0;}
+    51%  {opacity: 1;}
+    100% {opacity: 1;}
+}
+#dialog .dialog-row{
+  width: 800px;
+  color : #00cc00;
+  margin:0 0 0 10px;
+}
+
+#dialog-row-shining{
+  animation: shining 1s infinite;
+}
+
+#codeBox{
+  margin:10px auto 0 auto;
+}
+
+#compile-button{
+  display: block;
+}
+
+body{
+  padding : 0;
+  margin : 0;
+}

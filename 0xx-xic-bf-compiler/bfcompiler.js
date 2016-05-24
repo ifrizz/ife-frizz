@@ -1,4 +1,4 @@
-function brainfxxk(input){
+﻿function brainfxxk(input){
     var cells = [];
     for (var i=0; i<3000; ++i) cells[i] = 0;
     var output = "", ptr = 0, loopStk = [];
