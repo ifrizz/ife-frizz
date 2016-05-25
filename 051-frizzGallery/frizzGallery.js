@@ -13,7 +13,6 @@
         var gallery = QAQ(parentDOM, imageList).show();
   3.疑问，这里考虑的实现方式是传入parentDOM, 然后用代码进行DOM填充。 找到的 jQuery ui 并不是这么做的，这种方式可能并不优雅。
           考虑这里不对DOM进行任何的增删操作，只负责改变样式，要如何做？
-  4.我需要找一个妹子抚慰我受伤的心灵
 ********************************************************/
 ; (function(global) {
     
@@ -34,13 +33,11 @@
         },
         
         add : function(url){
-            this.layout.add.bind(this.layout);
             this.layout.add(url);
             return this;
         },
         
-        show : function(url){
-            this.layout.show.bind(this.layout);
+        show : function(){
             this.layout.show();
             return this;
         },
@@ -48,19 +45,15 @@
         setup : function($parentDOM, imageList){
             //初始化时调用 
             if((!$parentDOM) && (!imageList)){
-                //bind更保险一些, 可以用call
-                this.layout.setup.bind(this.layout);
                 this.layout.setup(this.$parentDOM, this.imageList);
                 return;
             }
-            //后期修改调用
+            //修改时调用
             if($parentDOM)
                 this.parentDOM = $parentDOM;
             if(imageList)
                 this.imageList = imageList;
             this.validate();
-            //bind更保险一些, 可以用call  = = 为什么不用call呢..
-            this.layout.setup.bind(this.layout);
             this.layout.setup(this.parentDOM, this.imageList);
             return this;
         }
