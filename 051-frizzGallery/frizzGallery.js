@@ -80,7 +80,7 @@
                     console.log("Empty ImageList.");
                     return;
                 }
-
+                this.$parentDOM.innerHTML = "";
 
                 // the callback function will append the preloaded images
 
@@ -163,7 +163,8 @@
                     console.log("Empty ImageList.");
                     return;
                 }
-
+                this.$parentDOM.innerHTML = "";
+                
                 // preset the layouts
                 
                 for (var i = 0; i < this.numInCol; i++) {

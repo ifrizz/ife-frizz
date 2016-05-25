@@ -1,12 +1,6 @@
-body {
-  display: flex;
-}
 #testbox{
-/*   width:100px;
-   height:100px;
-*/
   width: 80%;
-  /*height: 80%;*/
+  margin: auto;
 }
 
 div[class |= image-puzzle] {
@@ -105,10 +99,6 @@ div[class |= image-puzzle] {
 }
 
 
-#testbox {
-  margin: 10px;
-}
-
 .img-pubu-col{
   float: left;
   position: relative;
@@ -118,7 +108,7 @@ div[class |= image-puzzle] {
 
 .img-mutong-row{
   display:flex;
-  width: 80%;
+  width: 100%;
   margin: auto;
 }
 
