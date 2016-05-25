@@ -1,7 +1,5 @@
-
-
-var imgNum = 6, imgList = [];
-var g = QAQ(document.getElementById("testbox"), "pubu", imgList);
+var imgNum = 5, imgList = [];
+var g = QAQ(document.getElementById("testbox"), "puzzle", imgList);
 
 
 for (var i = 0; i < imgNum; i++){

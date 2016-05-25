@@ -67,8 +67,69 @@
     };
     var layout = {
 		mutong : {
-			
-			
+            imageList : undefined,
+            $parentDOM : undefined,
+            numInRow: 4,
+
+            setup : function($parentDOM, imageList){
+                this.$parentDOM = $parentDOM;
+                this.$parentDOM.className = 'image-mutong';
+                this.imageList = imageList;
+            },
+
+            show : function(){
+                var picNum = this.imageList.length,
+                    imageObjs = [],
+                    numInRow = this.numInRow,
+                    $parentDOM = this.$parentDOM;
+
+                if(picNum === 0){
+                    console.log("Empty ImageList.");
+                    return;
+                }
+
+
+                // the callback function will append the preloaded images
+
+                var callback = function() {
+                    for (var i = 0; i < imageObjs.length; i++) {
+                         
+                        if (i % numInRow === 0){
+                            var $div_imgRow = document.createElement("div");
+                            $div_imgRow.className = "img-mutong-row";
+                            $parentDOM.appendChild($div_imgRow);
+                        }
+
+                        var $div_imgContainer = document.createElement("div"),
+                            $img_div = imageObjs[i];
+
+                        $img_div.ratio = $img_div.width / $img_div.height;
+                        $div_imgContainer.className = "padding";
+                        $div_imgContainer.style.flex = $img_div.ratio;
+                        $div_imgContainer.appendChild($img_div);
+                        $div_imgRow.appendChild($div_imgContainer);      
+                    }
+                };
+
+                // preload the images and get the width AND height
+
+                for (var i = 0; i < this.imageList.length; i++){
+                    var $img_div = new Image();                        
+                    $img_div.src = this.imageList[i];
+                    imageObjs.push($img_div);
+
+                    $img_div.onload = function() {
+                        if (--picNum === 0) { callback(); }
+                    }    
+                }      
+            },
+            
+            
+            add : function(url){
+                this.imageList.push(url);
+                this.show();
+            }
+
 		},
 		
 		pubu : {

@@ -116,7 +116,22 @@ div[class |= image-puzzle] {
   flex-flow: column;
 }
 
+.img-mutong-row{
+  display:flex;
+  width: 80%;
+  margin: auto;
+}
+
+.padding{
+  padding: 3px;
+}
+
 [class |= image-pubu] img{
+  width:100%;
+  height:auto;
+}
+
+[class |= image-mutong] img{
   width:100%;
   height:auto;
 }
