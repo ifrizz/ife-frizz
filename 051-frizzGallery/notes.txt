@@ -1,0 +1,73 @@
+(....)
+Album
+------------
++ add(image)
+....
+------------
+- layout
+
+
+
+(View)
+<interface>
+Layout
+---------------
++ add(image)
++ setup(parentDOM, ....)
+
+
+Mutong : Layout
+---------------
++ add(image)
+.....
+
+
+Pubu : Layout
+--------------
++ add(image)
+
+
+
+
+Album {
+   layout = new Pubu();
+   imageList;
+
+   set() {
+      for(image : imageList) {
+         add(image);
+      }
+   }
+
+   add(image) {
+       layout.add(image);
+   }
+}
+
+
+
+
+
+
+(Model)
+
+ImageList : Iterator
+---------------------
++ next() : image
+
+--------------------------------------------------------
+
+1. 每次点击图片，创建DIV ： DOM相关操作都很贵！
+2. 开始创建DIV，后面一直用：
+var mask = new DIV;
+3. 
+function createMask() {
+    bool created = false;
+    var mask;
+    if (!created) {
+         mask = new DIV;
+    }
+    return mask;
+}
+
+Singleton --> instance

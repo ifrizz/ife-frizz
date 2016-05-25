@@ -2,8 +2,11 @@ body {
   display: flex;
 }
 #testbox{
-   width:100px;
+/*   width:100px;
    height:100px;
+*/
+  width: 80%;
+  /*height: 80%;*/
 }
 
 div[class |= image-puzzle] {
@@ -101,3 +104,19 @@ div[class |= image-puzzle] {
     height: calc(100% / 3.0);
 }
 
+
+#testbox {
+  margin: 10px;
+}
+
+.img-pubu-col{
+  float: left;
+  position: relative;
+  display:flex;
+  flex-flow: column;
+}
+
+[class |= image-pubu] img{
+  width:100%;
+  height:auto;
+}
