@@ -139,13 +139,18 @@ div[class |= image-puzzle] {
     background: rgba(0,0,0,0.8);
     text-align: center;
     margin: 0;
-    padding: 10vw;
+    padding: 0 calc(5vw + 10px) 0 5vw;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .gallery-display img {
     max-width: 70vw;
     max-height: 90vh;
     width: auto;
     height: auto;
+    margin: 10px;
 }
 /* left arrow */
 
