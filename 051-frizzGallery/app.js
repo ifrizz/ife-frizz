@@ -1,45 +1,57 @@
 ; (function(global) {
-	var imgNum = 15, 
+	var imgNum = 5, 
 		imgList = [],
 		layoutDict = {
 			"PUZZLE" : "puzzle",
 			"WATERFALL" : "pubu",
 			"BARREL" : "mutong"
-		};
+		},
+		g = QAQ(document.getElementById("testbox"), layout, imgList),
+		layout = "puzzle";
 
-
-	for (var i = 0; i < imgNum; i++){
+	var genPic = function() {
 	    var width = Math.floor(Math.random() * 300 + 300);
 	    var height = Math.floor(Math.random() * 300 + 300);
 	    var color = Math.random().toString(16).substring(2,8);
 	    var myurl = "http://placehold.it/" + width + "x" + height + "/" + color + "/fff";
-	    imgList.push(myurl);
+	    return myurl;
 	}
 
 	var show = function(_layout) {
 		layout = _layout || "puzzle";
-		console.log(layout);
-		var g = QAQ(document.getElementById("testbox"), layout, imgList);
+		g = QAQ(document.getElementById("testbox"), layout, imgList);
 		g.show();
 	}
 
-
-	// g.add("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").show();
+	var add = function() {
+		var newurl = genPic();
+		g.add(newurl);
+	}
 
 	// alert(document.getElementsByClassName('active')[0].innerHTML);
 
+	for (var i = 0; i < imgNum; i++){
+	    imgList.push(genPic());
+	}
+
 	var lists = document.getElementsByTagName('li');
 	for (var i = 0; i < lists.length; i++) {
-		var _show = function(idx) {
-				return function() {
-					document.getElementsByClassName('active')[0].className = "";
-					lists[idx].className = "active";
-					new_layout = layoutDict[lists[idx].firstChild.innerHTML]
-					show(new_layout);
-				}
-			};
+		if (lists[i].className !== "add") {
+			var _show = function(idx) {
+					return function() {
+						document.getElementsByClassName('active')[0].className = "";
+						lists[idx].className = "active";
+						new_layout = layoutDict[lists[idx].firstChild.innerHTML]
+						show(new_layout);
+					}
+				};
 
-		lists[i].addEventListener("click", _show(i));
+			lists[i].addEventListener("click", _show(i));
+		}
+		else {
+
+			lists[i].addEventListener("click", add);	
+		}
 		
 	}
 
