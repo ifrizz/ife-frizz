@@ -11,7 +11,7 @@ div[class |= image-puzzle] {
 
 [class |= image-puzzle] img{
   object-fit: cover;
-  float: left;  
+  float: left;
 }
 
 .image-puzzle-1 img{
@@ -124,4 +124,50 @@ div[class |= image-puzzle] {
 [class |= image-mutong] img{
   width:100%;
   height:auto;
+}
+
+/* fullscreen display */
+.gallery-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+    margin: 0;
+    padding: 10vw;
+}
+.gallery-display img {
+    max-width: 70vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+}
+/* left arrow */
+
+.gallery-display-left-arrow {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-right: 30px solid #aaa;
+}
+.gallery-display-left-arrow:hover {
+    border-right: 30px solid white;
+}
+
+/* right arrow */
+.gallery-display-right-arrow {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid #aaa;
+}
+.gallery-display-right-arrow:hover {
+    border-left: 30px solid white;
 }
