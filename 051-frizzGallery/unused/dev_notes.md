@@ -44,3 +44,6 @@ html: use the library
 </body>
 </html>
 ```
+
+* onscroll事件
+绑定在window元素上，不能绑定在body上 -____-|||

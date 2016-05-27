@@ -23,6 +23,8 @@
     };
 
     frizzGallery.prototype = {
+        layoutType : undefined,
+
         validate : function(){
             if(this.$parentDOM.constructor.toString().indexOf("Element") === -1)
                 throw "Need a HTMLDOM";
@@ -44,6 +46,8 @@
         },
 
         setup : function($parentDOM, imageList){
+            layoutType = this.layout;
+
             //初始化时调用
             if((!$parentDOM) && (!imageList)){
                 this.layout.setup(this.$parentDOM, this.imageList);
@@ -57,6 +61,11 @@
             this.validate();
             this.layout.setup(this.parentDOM, this.imageList);
             return this;
+        },
+
+        scrollLoading : function() {
+            layoutType.scrollLoading();
+            return this;
         }
     };
     var layout = {
@@ -67,7 +76,7 @@
 
             setup : function($parentDOM, imageList){
                 this.$parentDOM = $parentDOM;
-                this.$parentDOM.className = 'image-mutong';
+                // this.$parentDOM.className = 'image-mutong';
                 this.imageList = imageList;
             },
 
@@ -86,12 +95,16 @@
                 // the callback function will append the preloaded images
 
                 var callback = function() {
+                    var $containerDOM = document.createElement("div");
+                    $containerDOM.className = "mutong-layout";
+                    $parentDOM.appendChild($containerDOM);
+
                     for (var i = 0; i < imageObjs.length; i++) {
 
                         if (i % numInRow === 0){
                             var $div_imgRow = document.createElement("div");
                             $div_imgRow.className = "img-mutong-row";
-                            $parentDOM.appendChild($div_imgRow);
+                            $containerDOM.appendChild($div_imgRow);
                         }
 
                         var $div_imgContainer = document.createElement("div"),
@@ -118,6 +131,10 @@
                 }
             },
 
+            scrollLoading :function() {
+
+            },
+
 
             add : function(url){
                 this.imageList.push(url);
@@ -131,11 +148,13 @@
             $parentDOM : undefined,
             numInCol : 4,
             paddingVal : 16,
+            nextIdx : 0,
+            maxShow : 10,
+            imageObjs : [],
 
 
             setup : function($parentDOM, imageList){
                 this.$parentDOM = $parentDOM;
-                this.$parentDOM.className = 'image-pubu';
                 this.imageList = imageList;
             },
 
@@ -156,9 +175,7 @@
 
             show : function(){
                 var picNum = this.imageList.length,
-                    padding = this.paddingVal,
-                    selector = this.selector.bind(this),
-                    imageObjs = [];
+                    renderPics = this.renderPics;
 
                 if(picNum === 0){
                     console.log("Empty ImageList.");
@@ -167,51 +184,77 @@
                 this.$parentDOM.innerHTML = "";
 
                 // preset the layouts
+                var $containerDOM = document.createElement("div");
+                $containerDOM.className = "pubu-layout";
+                this.$parentDOM.appendChild($containerDOM);
+
 
                 for (var i = 0; i < this.numInCol; i++) {
                     var $div_imgCol = document.createElement("div");
                     $div_imgCol.className = "img-pubu-col";
                     $div_imgCol.style.width = (100 / this.numInCol).toString() + "%";
                     $div_imgCol.id = "col-" + i.toString();
-                    this.$parentDOM.appendChild($div_imgCol);
+                    $containerDOM.appendChild($div_imgCol);
                 }
 
                 // the callback function will append the preloaded images
 
                 var callback = function() {
-
-                    for (var i = 0; i < imageObjs.length; i++) {
-                        var idx = selector(),
-                            $div_imgContainer = document.createElement("div"),
-                            $img_div = imageObjs[i],
-                            $div_imgCol = document.getElementById("col-" + idx.toString());
-
-                        $img_div.ratio = $img_div.height / $img_div.width;
-
-                        $div_imgContainer.className = "item";
-                        $div_imgContainer.style.padding = padding.toString() + "px";
-                        $div_imgContainer.style.height = ($img_div.ratio * ($div_imgCol.offsetWidth - 2 * this.paddingVal)).toString() + "px";
-                        $div_imgContainer.appendChild($img_div);
-                        $div_imgCol.appendChild($div_imgContainer);
-                    }
+                    this.nextIdx = this.imageObjs.length > this.maxShow ? this.maxShow : this.imageObjs.length;
+                    renderPics.bind(this)(0, this.nextIdx);
                 };
 
                 // preload the images and get the width AND height
 
+                this.imageObjs = [];
+                this.nextIdx = 0;
                 for (var i = 0; i < this.imageList.length; i++){
-                    var $img_div = new Image();
+                    var $img_div = new Image(), _this = this;
                     $img_div.src = this.imageList[i];
-                    imageObjs.push($img_div);
+                    _this.imageObjs.push($img_div);
+                    // args["imageObjs"].push($img_div);
                     addDisplayEvent($img_div, $img_div.src);
                     $img_div.onload = function() {
-                        if (--picNum === 0) { callback(); }
+                        if (--picNum === 0) { callback.bind(_this)(); }
                     }
                 }
+
+
+            },
+            scrollLoading : function() {
+                var start = this.nextIdx, end = start + this.maxShow;
+                end = end > this.imageObjs.length ? this.imageObjs.length : end;
+                this.nextIdx = end;
+                // console.log()
+                alert("我真的在加载哟!!!"); 
+                this.renderPics(start, end);
+            },
+
+            renderPics : function(start, end) {
+                if (start < 0 || start >= this.imageObjs.length || end > this.imageObjs.length) { return ;}
+                // console.log(this);
+                for (var i = start; i < end; i++) {
+                    var idx = this.selector(),
+                        $div_imgContainer = document.createElement("div"),
+                        $img_div = this.imageObjs[i],
+                        $div_imgCol = document.getElementById("col-" + idx.toString());
+                    
+                    $img_div.ratio = $img_div.height / $img_div.width;
+
+                    // $div_imgContainer.className = "padding";
+                    $div_imgContainer.style.padding = this.paddingVal.toString() + "px";
+                    // $div_imgContainer.style.height = ($img_div.ratio * ($div_imgCol.offsetWidth - 2 * this.paddingVal)).toString() + "px";
+                    $div_imgContainer.appendChild($img_div);
+                    $div_imgCol.appendChild($div_imgContainer);
+                }
+
+                // this.nextIdx += end - start;
             },
 
 
             add : function(url){
                 this.imageList.push(url);
+                this.maxShow += 1;
                 this.show();
             }
 
@@ -232,8 +275,13 @@
                     console.log("Empty ImageList.");
                     return;
                 }
-                console.log(this.$parentDOM);
+                // console.log(this.$parentDOM);
                 this.$parentDOM.innerHTML = "";
+                var $containerDOM = document.createElement("div");
+                $containerDOM.className = "puzzle-layout";
+                this.$parentDOM.appendChild($containerDOM);
+
+
                 var picNum = this.imageList.length;
                 if(this.imageList.length > 6){
                     picNum = 6;
@@ -247,7 +295,7 @@
                     addDisplayEvent($img, $img.src);
                     $box.appendChild($img);
                 }
-                this.$parentDOM.appendChild($box);
+                $containerDOM.appendChild($box);
                 //3图和5图的情况无法用css实现
                 this.handleExpView();
                 var _this = this;
@@ -268,6 +316,10 @@
                    $box.childNodes[3].style.height = $box.offsetWidth / 3.0 + "px";
                    $box.childNodes[4].style.height = $box.offsetHeight - $box.offsetWidth / 3.0 + "px";
                 }
+
+            },
+
+            scrollLoading :function() {
 
             },
 
@@ -381,5 +433,19 @@
     ///////////////////////////////////////
     // end fullscreen display
     ///////////////////////////////////////
+
+
+    /******** 拖到页面尾部后动态加载图片  *********/
+
+
+    window.onscroll = function() {
+        var scrollH = document.body.scrollHeight,
+            clientH = document.body.clientHeight,
+            scrollTop = document.body.scrollTop;
+        var t = scrollH - clientH - scrollTop;
+        if (t <= 0) {
+            frizzGallery.prototype.scrollLoading();
+        }
+    };
 
 }(window));

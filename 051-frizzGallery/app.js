@@ -1,12 +1,12 @@
 ; (function(global) {
-	var imgNum = 5, 
+	var imgNum = 18, 
 		imgList = [],
 		layoutDict = {
 			"PUZZLE" : "puzzle",
 			"WATERFALL" : "pubu",
 			"BARREL" : "mutong"
 		},
-		g = QAQ(document.getElementById("testbox"), layout, imgList),
+		g = QAQ(document.getElementById("container"), layout, imgList),
 		layout = "puzzle";
 
 	var genPic = function() {
@@ -19,7 +19,7 @@
 
 	var show = function(_layout) {
 		layout = _layout || "puzzle";
-		g = QAQ(document.getElementById("testbox"), layout, imgList);
+		g = QAQ(document.getElementById("container"), layout, imgList);
 		g.show();
 	}
 

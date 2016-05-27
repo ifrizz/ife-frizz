@@ -1,6 +1,9 @@
-#testbox{
+#container{
   width: 80%;
   margin: auto;
+/*  height: 100%;
+  overflow: scroll;
+*/
 }
 
 div[class |= image-puzzle] {
@@ -9,7 +12,7 @@ div[class |= image-puzzle] {
    height:100%;
 }
 
-[class |= image-puzzle] img{
+[class |= puzzle-layout] img{
   object-fit: cover;
   float: left;
 }
@@ -116,14 +119,18 @@ div[class |= image-puzzle] {
   padding: 3px;
 }
 
-[class |= image-pubu] img{
+[class |= pubu-layout] img{
   width:100%;
   height:auto;
 }
 
-[class |= image-mutong] img{
+[class |= mutong-layout] img{
   width:100%;
   height:auto;
+}
+
+.mutong {
+  width: 100%;
 }
 
 /* fullscreen display */
