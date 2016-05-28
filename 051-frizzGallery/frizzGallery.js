@@ -80,6 +80,18 @@
                 this.imageList = imageList;
             },
 
+            helpers : {
+                addImgToRow : function($div_imgRow, $img){
+                    var $div_imgContainer = document.createElement("div");
+                    $img.ratio = $img.width / $img.height;
+                    $div_imgContainer.className = "padding";
+                    $div_imgContainer.style.flex = $img.ratio;
+                    $div_imgContainer.appendChild($img);
+                    $div_imgRow.appendChild($div_imgContainer);
+                }
+            },
+
+
             show : function(){
                 var picNum = this.imageList.length,
                     imageObjs = [],
@@ -107,25 +119,28 @@
                             $containerDOM.appendChild($div_imgRow);
                         }
 
-                        var $div_imgContainer = document.createElement("div"),
-                            $img_div = imageObjs[i];
+                        //var $div_imgContainer = document.createElement("div"),
+                        //    $img_div = imageObjs[i];
+                        this.helpers.addImgToRow($div_imgRow, imageObjs[i]);
 
-                        $img_div.ratio = $img_div.width / $img_div.height;
-                        $div_imgContainer.className = "padding";
-                        $div_imgContainer.style.flex = $img_div.ratio;
-                        $div_imgContainer.appendChild($img_div);
-                        $div_imgRow.appendChild($div_imgContainer);
+                        //$img_div.ratio = $img_div.width / $img_div.height;
+                        //$div_imgContainer.className = "padding";
+                        //$div_imgContainer.style.flex = $img_div.ratio;
+                        //$div_imgContainer.appendChild($img_div);
+                        //$div_imgRow.appendChild($div_imgContainer);
                     }
                 };
+
+                callback = callback.bind(this);
 
                 // preload the images and get the width AND height
 
                 for (var i = 0; i < this.imageList.length; i++){
-                    var $img_div = new Image();
-                    $img_div.src = this.imageList[i];
-                    imageObjs.push($img_div);
-                    addDisplayEvent($img_div, $img_div.src);
-                    $img_div.onload = function() {
+                    var $img = new Image();
+                    $img.src = this.imageList[i];
+                    imageObjs.push($img);
+                    addDisplayEvent($img, $img.src);
+                    $img.onload = function() {
                         if (--picNum === 0) { callback(); }
                     }
                 }
@@ -137,8 +152,38 @@
 
 
             add : function(url){
+                /*
                 this.imageList.push(url);
                 this.show();
+                */
+
+                var $targetRow;
+
+                $lastRow = this.$parentDOM.firstChild.lastChild;
+                var lastRowChildren = $lastRow.childNodes;
+
+                this.imageList.push(url);
+
+                var MAX_NUM = 6;
+
+                if (lastRowChildren.length < MAX_NUM) {
+                    $targetRow = $lastRow;
+                } else {
+                    var $div_imgRow = document.createElement("div");
+                    $div_imgRow.className = "img-mutong-row";
+                    this.$parentDOM.firstChild.appendChild($div_imgRow);
+                    for (var i = 0; i < 2; i++){
+                        $div_imgRow.appendChild(lastRowChildren[MAX_NUM-2]);
+                    }
+                    $targetRow = $div_imgRow;
+                }
+
+                var $img = new Image();
+                $img.src = url;
+                var helpers = this.helpers;
+                $img.onload = function() {
+                    helpers.addImgToRow($targetRow, $img);
+                }
             }
 
 		},
@@ -226,7 +271,7 @@
                 end = end > this.imageObjs.length ? this.imageObjs.length : end;
                 this.nextIdx = end;
                 // console.log()
-                alert("我真的在加载哟!!!"); 
+                alert("我真的在加载哟!!!");
                 this.renderPics(start, end);
             },
 
@@ -238,7 +283,7 @@
                         $div_imgContainer = document.createElement("div"),
                         $img_div = this.imageObjs[i],
                         $div_imgCol = document.getElementById("col-" + idx.toString());
-                    
+
                     $img_div.ratio = $img_div.height / $img_div.width;
 
                     // $div_imgContainer.className = "padding";
