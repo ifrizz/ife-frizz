@@ -1,14 +1,14 @@
 # 呆毛大本营
 
-## 任务
-- 第四阶段DDL: **2016年5月22日**
+This repository contains programming practice in Front-End development following [Baidu-IFE](http://ife.baidu.com/).
 
-## 笔记
+Group members: [@cecilia-cx](https://github.com/cecilia-cx), [@cindywang319](https://github.com/cindywang319), [@wenxin-bupt](https://github.com/wenxin-bupt), [@weicliu](https://github.com/weicliu)
+
+## Notes Hub
 - [点我点我](./notes)
 
-## 上传代码
-1. 每次开始一个新任务前，新建一个文件夹，命名为 `[task number]-[your name]-[task name]`，比如 `001-frizz-HTMLBasics`
-2. 快 `push` 上来让我们看到你的爱
-3. 先做完的可以代表呆毛提交
+## Task Description
+
+* [LINK](http://ife.baidu.com/task/all) 
 
 ![Thanks Xinxin](frizz.png)
