@@ -119,15 +119,7 @@
                             $containerDOM.appendChild($div_imgRow);
                         }
 
-                        //var $div_imgContainer = document.createElement("div"),
-                        //    $img_div = imageObjs[i];
                         this.helpers.addImgToRow($div_imgRow, imageObjs[i]);
-
-                        //$img_div.ratio = $img_div.width / $img_div.height;
-                        //$div_imgContainer.className = "padding";
-                        //$div_imgContainer.style.flex = $img_div.ratio;
-                        //$div_imgContainer.appendChild($img_div);
-                        //$div_imgRow.appendChild($div_imgContainer);
                     }
                 };
 
