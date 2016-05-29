@@ -1,0 +1,59 @@
+修改layout: 使用module → enable private function
+
+frizz {
+   
+   mutong.add(a);
+}
+
+var layout = {
+   mutong : mutong(),
+   putu: pubu()
+}
+
+var mutong = (function() {
+   return {
+       add: add,
+       func: func
+   };
+
+   function helper() {
+   }
+
+   function add(a) {
+       helper()
+   }
+
+   function func(b) {
+       helper()
+   }
+})();
+
+========================================================
+
+【Revealing Module Pattern】
+Declare all the fields to be private, 
+and return an anonymous object with pointers to the fields
+
+var revealingModule = (function(){
+
+    var privateVar1, privateVar2, privateVar3;
+
+    return {
+
+        publicVar1: privateVar1,
+
+        publicVar2: privateVar2
+
+    };
+})();
+
+Disadvantages
+* If a private function refers to a public function, that public function cannot be overridden if a patch is necessary
+* Take care during usage
+
+
+
+========================================================
+
+Singleton: 调用某个class的object时，调到的是同一个object（instance）
+Lazy singleton: 初始时不创建instance，在第一次调用时创建
